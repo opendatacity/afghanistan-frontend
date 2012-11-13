@@ -40,7 +40,7 @@ function Document(data, index, renderer) {
 	function startReader(index, data, viewObject) {
 	}
 
-	var viewObject = renderer.drawImage(imageUrl, 'thumb', color);
+	var viewObject = renderer.drawImage(imageUrl, 'thumb', color, 'Unterrichtung des Parlaments '+data.title_);
 	
 	var thumbs = [];
 	for (var i = 0; i < data.c; i++) {
@@ -50,10 +50,11 @@ function Document(data, index, renderer) {
 	}
 	
 	viewObject.popover({
-		title:'Unterrichtung des Parlaments '+data.title,
 		html:true,
-		content:thumbs.join('')+'<br clear="both">',
-		trigger:'manual'
+		content:thumbs.join('')+'<br clear="both" />',
+		trigger:'manual',
+		placement:'bottom'
+	});
 	});
 		
 	viewObject.click(viewObject, function (e) {
@@ -101,8 +102,8 @@ function qualityToColor(v) {
 function Renderer(target) {
 	var me = this;
 	
-	me.drawImage = function (url, className, backgroundColor) {
-		var div = $('<div class="'+className+'" style="background-color:'+backgroundColor+';background-image:url(\''+url+'\')" ></div>');
+	me.drawImage = function (url, className, backgroundColor, title) {
+		var div = $('<div class="'+className+'" title="'+title+'" style="background-color:'+backgroundColor+';background-image:url(\''+url+'\')" ></div>');
 		//var img = $('<img src="'+url+'"/>');
 		//div.append(img);
 		target.append(div);
