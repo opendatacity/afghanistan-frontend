@@ -78,6 +78,8 @@ function initData() {
 		
 		doc.title = doc.j+'-'+week;
 		
+		doc.title_ = parseInt(doc.w)+"/"+doc.j;
+		
 		quality = $quality[doc.j][week];
 		quality = quality.split('');
 		
