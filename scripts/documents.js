@@ -55,6 +55,9 @@ function Document(data, index, renderer) {
 		trigger:'manual',
 		placement:'bottom'
 	});
+	
+	viewObject.tooltip({
+		placement: 'bottom'
 	});
 		
 	viewObject.click(viewObject, function (e) {
