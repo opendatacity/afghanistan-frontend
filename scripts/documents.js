@@ -23,7 +23,7 @@ function Documents(renderer) {
 	
 	$(document).click(function(e) {
 		if (popoverVisible !== undefined) {
-			$('.thumb').popover('hide')
+			$('.thumb').stop().popover('hide')
 			popoverVisible = undefined
 		}
 	});
@@ -59,11 +59,17 @@ function Document(data, index, renderer) {
 		
 	viewObject.click(viewObject, function (e) {
 		//startReader(index, data, viewObject);
-		
-		$('.thumb').popover('hide');
+		//$('.thumb.popped').popover('hide');
 		if (popoverVisible !== viewObject) {
+			if (popoverVisible) popoverVisible.popover('hide');
 			popoverVisible = viewObject;
-			viewObject.popover('show');
+			viewObject.tooltip('destroy');
+			viewObject.stop().popover('show');
+			unselect();
+		} else {
+			popoverVisible.popover('hide');
+			viewObject.tooltip({placement: 'bottom'});
+			popoverVisible = undefined;
 		}
 		e.preventDefault();
 		return false;
