@@ -4,9 +4,18 @@ var canvas, renderer, documents, currentLayout;
 $(function () {
 	initData();
 	
-	$('#layoutButtons').append($('<button class="btn">Kompakt</button>'      ).click(function () { setLayout(layouts.compact,   1000) }));
-	$('#layoutButtons').append($('<button class="btn">nach Qualität</button>').click(function () { setLayout(layouts.quality,   1000) }));
-	$('#layoutButtons').append($('<button class="btn">Quartalsweise</button>').click(function () { setLayout(layouts.quarterly, 1000) }));
+	$('#layoutButtons').append($('<button class="btn">Kompakt</button>').click(function () { 
+		$('#canvas').css('min-height', '850px');
+		setLayout(layouts.compact, 1000);
+	}));
+	$('#layoutButtons').append($('<button class="btn">nach Qualität</button>').click(function () { 
+		$('#canvas').css('min-height', '850px');
+		setLayout(layouts.quality, 1000);
+	}));
+	$('#layoutButtons').append($('<button class="btn">Quartalsweise</button>').click(function () { 
+		$('#canvas').css('min-height', '1550px');
+		setLayout(layouts.quarterly, 1000);
+	}));
 	
 	canvas = $('#canvas');
 	renderer = new Renderer(canvas);
