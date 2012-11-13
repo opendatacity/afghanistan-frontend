@@ -53,3 +53,10 @@ body {
 	padding-top: 10px;
 	z-index: -100;
 }
+#footer {
+	display: block;
+	position: relative;
+	margin: 0px;
+	padding: 20px;
+	background-color: #e6e6e6;
+}
