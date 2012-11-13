@@ -62,18 +62,17 @@ function Document(data, index, renderer) {
 		
 	viewObject.click(viewObject, function (e) {
 		//startReader(index, data, viewObject);
-		//$('.thumb.popped').popover('hide');
 		if (popoverVisible !== viewObject) {
 			if (popoverVisible) popoverVisible.popover('hide');
 			popoverVisible = viewObject;
 			viewObject.tooltip('destroy');
 			viewObject.stop().popover('show');
-			unselect();
 		} else {
 			popoverVisible.popover('hide');
 			viewObject.tooltip({placement: 'bottom'});
 			popoverVisible = undefined;
 		}
+		unselect();
 		e.preventDefault();
 		return false;
 	});
