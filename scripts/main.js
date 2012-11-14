@@ -104,36 +104,6 @@ var layouts = {
 	}
 };
 
-/*
-function date2position(d, type) {
-	var t = date2time(d);
-	return time2position(t, type);
-}
-
-function time2position(t, type) {
-	var weekOffset = 2235;
-	var dayWidth = 2;
-	var d = Math.floor(t/86400000);
-	
-	switch (type) {
-		case 'weeklyX':
-			var w = Math.floor(d/7)/4;
-			return (weekOffset-w*4)*7*dayWidth;
-		case '4weekly':
-			var w = Math.floor(d/28);
-			return {
-				y:(d-Math.floor(d/28)*28)*10,
-				x:(weekOffset-Math.floor(d/7))*7*dayWidth
-			}
-		case 'dailyX':
-			return (weekOffset*7-d)*dayWidth;
-	}
-}
-
-function date2time(d) {
-	return (d-25569)*86400000
-}
-*/
 function initCanvas() {
 /*
 	// weeks
