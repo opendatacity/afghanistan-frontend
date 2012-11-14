@@ -52,29 +52,8 @@ function Document(data, index, renderer) {
 	viewObject.popover({
 		html:true,
 		content:thumbs.join('')+'<br clear="both" />',
-		trigger:'manual',
+		trigger:'hover',
 		placement:'bottom'
-	});
-	
-	viewObject.tooltip({
-		placement: 'bottom'
-	});
-		
-	viewObject.click(viewObject, function (e) {
-		//startReader(index, data, viewObject);
-		if (popoverVisible !== viewObject) {
-			if (popoverVisible) popoverVisible.popover('hide');
-			popoverVisible = viewObject;
-			viewObject.tooltip('destroy');
-			viewObject.stop().popover('show');
-		} else {
-			popoverVisible.popover('hide');
-			viewObject.tooltip({placement: 'bottom'});
-			popoverVisible = undefined;
-		}
-		unselect();
-		e.preventDefault();
-		return false;
 	});
 	
 	me.setPosition = function (f) {
