@@ -18,8 +18,31 @@ $(function () {
 	documents = new Documents(renderer);
 	setLayout(layouts.quality, 0);
 	
+	$(window).resize((function () {
+		var resizeStarted = false;
+		var resizeInProg = false;
+		var check = function () {
+			if (resizeInProg) {
+				resizeInProg = false;
+				setTimeout(check, 250);
+			} else {
+				relayout();
+				resizeStarted = false;
+			}
+		}
+		return function () {
+			resizeInProg = true;
+			if (!resizeStarted) check();
+			resizeStarted = true;
+		}
+	})())
+	
 	initSearch();
 });
+
+function relayout() {
+	documents.moveToPosition(currentLayout.projection(), 1000);
+}
 
 function setLayout(layout, duration) {
 	if (layout === currentLayout) return;
@@ -53,6 +76,7 @@ var layouts = {
 			var w0 = $('#canvas').innerWidth()-40;
 			var w = w0 - 240;
 			var n = Math.floor(w/41);
+			if (n < 5) n = 5;
 			w = n*41 - 20;
 			var x0 = (w0-w)/2;
 			var lookup = this.lookup;
