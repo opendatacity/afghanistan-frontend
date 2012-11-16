@@ -1,5 +1,5 @@
 
-var canvas, renderer, documents, currentLayout;
+var canvas, renderer, documents, documentsIndex, currentLayout;
 var $pages = [];
 var layoutingDuration = 500;
 
@@ -17,6 +17,16 @@ $(function () {
 	renderer = new Renderer(canvas);
 	documents = new Documents(renderer);
 	setLayout(layouts.quality, 0);
+
+	hashCheck();
+	
+	$(window).bind('hashchange', function(e){
+		hashCheck();
+	});
+
+	$(window).bind('onhashchange', function(e){
+		hashCheck();
+	});
 	
 	$(window).resize((function () {
 		var resizeStarted = false;
@@ -36,7 +46,7 @@ $(function () {
 			resizeStarted = true;
 		}
 	})())
-	
+		
 	initSearch();
 });
 
@@ -118,3 +128,5 @@ var layouts = {
 		}
 	}
 };
+
+

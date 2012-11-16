@@ -4,8 +4,10 @@ function Documents(renderer) {
 	var me = this;
 	
 	var documents = [];
+	documentsIndex = {};
 	for (var i = 0; i < $documents.length; i++) {
 		documents[i] = new Document($documents[i], i, renderer);
+		documentsIndex[$documents[i].title] = i;
 	}
 	
 	me.newLayout = function (layout, duration) {
@@ -29,6 +31,8 @@ function Documents(renderer) {
 			for (var i = 0; i < documents.length; i++) documents[i].updateResultMarker(showResult);
 		}
 	}
+	
+	me.docs = documents;
 	
 	return me;
 }
@@ -143,10 +147,70 @@ $.easing.smooth = function(p) {
 		1 - Math.pow( p * -2 + 2, 3 ) / 2;
 }
 
-function Lightbox(data) {
+function Lightbox(h) {
+	
+	var issue = h.substr(0,7);
+	var page = h.substr(8,2);
 		
-	console.log(data);
+	var data = documents.docs[documentsIndex[issue]].data;
 
+	var $lb = $('#lightbox');
+	
+	if ($lb.data('issue') !== issue) {
+	
+		$lb.fadeOut('fast');
+		$lb.data({
+			year: data.j,
+			week: data.w,
+			page: page,
+			pages: data.c,
+			issue: issue
+		});
+		
+		var $lbnav = $('#lightbox-navigation-items');
+		
+		$lbnav.html('');
+		
+		var $lbel;
+		
+		for (var i=1; i<data.c; i++) {
+			
+			d = (i<10)?'0'+i:i;
+			
+			$lbel = $('<a href="javascript:;" class="lightbox-item" id="lightbox-item-'+issue+'-'+d+'">irks</a>');
+			$lbel.data({issue:issue,page:d});
+			$lbel.click(function(){
+				LightboxPage($(this).data('issue'), $(this).data('page'));
+			});
+			$lbel.append('<img src="http://wiki.derwesten-recherche.org/images/thumb/'+issue+'-'+d+'.png/90px-'+issue+'-'+d+'.png" />');
+			$lbnav.append($lbel);
+
+		}
+
+		$lbnav.css({width: ((data.c*40)+40)});
+				
+		$lb.fadeIn('fast');
+	
+	}
+	
+	LightboxPage(issue, page);
+	
+}
+
+function LightboxPage(issue,page) {
+
+	var conf = $('#lightbox').data();
+	
+	$('#lightbox-header').html('<h2>'+conf.week+'/'+conf.year+'</h2><h3>Seite '+page+'/'+conf.pages+'</h3>');
+	$('#lightbox-viewport').html('<img src="http://wiki.derwesten-recherche.org/images/'+issue+'-'+page+'.png" /><div id="lightbox-viewport-navigation"><a href="http://wiki.derwesten-recherche.org/wiki/'+issue+'-'+page+'">Transkript ansehen</a></div>');
+	$('.lightbox-item').removeClass('active');
+	$('#lightbox-item-'+issue+'-'+page).addClass('active');
+	location.hash=issue+'-'+page;
+
+}
+
+function oldLightbox(data) {
+		
 	w = (parseInt(data.w)<10)?'0'+data.w:data.w;
 	
 	$('#lightbox-header').html('<h2>'+data.w+'/'+data.j+'</h2><h3>Seite 1/'+data.c+'</h3>');
@@ -172,12 +236,11 @@ function Lightbox(data) {
 		});
 		el.click(function(){
 			var conf = $(this).data('conf');
-			console.log(conf);
 			$('#lightbox-header').html('<h2>'+conf.w+'/'+conf.j+'</h2><h3>Seite '+conf.i+'/'+conf.c+'</h3>');
-			$('#lightbox-viewport').html('<img src="http://wiki.derwesten-recherche.org/images/'+conf.j+'-'+conf.w+'-'+conf.d+'.png" />');
+			$('#lightbox-viewport').html('<img src="http://wiki.derwesten-recherche.org/images/'+conf.j+'-'+conf.w+'-'+conf.d+'.png" /><div id="lightbox-viewport-navigation"><a href="http://wiki.derwesten-recherche.org/wiki/'+data.j+'-'+w+'-'+conf.d+'">Transkript ansehen</a></div>');
 			$('.lightbox-item').removeClass('active');
 			$('#item-'+conf.i).addClass('active');
-			
+			location.hash=conf.j+'-'+conf.w+'-'+conf.d;
 		});
 		el.append('<img src="http://wiki.derwesten-recherche.org/images/thumb/'+data.j+'-'+w+'-'+d+'.png/90px-'+data.j+'-'+w+'-'+d+'.png" />');
 		$('#lightbox-navigation-items').append(el);
@@ -186,8 +249,19 @@ function Lightbox(data) {
 	
 	$('#item-1').addClass('active');
 
-	$('#lightbox-viewport').html('<img src="http://wiki.derwesten-recherche.org/images/'+data.j+'-'+w+'-01.png" />')
+	$('#lightbox-viewport').html('<img src="http://wiki.derwesten-recherche.org/images/'+data.j+'-'+w+'-01.png" /><div id="lightbox-viewport-navigation"><a href="http://wiki.derwesten-recherche.org/wiki/'+data.j+'-'+w+'-01">Transkript ansehen</a></div>');
+	location.hash = data.j+'-'+w+'-01';
 	
 	$('#lightbox').show();
+	
+}
+
+function hashCheck() {
+	
+	if (location.hash && location.hash.substr(1).match(/^20[0-9]{2}-[0-9]{2}-[0-9]{2}/) && documentsIndex.hasOwnProperty(location.hash.substr(1,7))) {
+		
+		Lightbox(location.hash.substr(1));
+		
+	}
 	
 }
