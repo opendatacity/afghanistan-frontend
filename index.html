@@ -2,13 +2,13 @@
 <html lang="de">
 	<head>
 		<meta charset="utf-8">
-		<title>Afghanistan-Papiere</title>
+		<title>Die Afghanistan-Papiere</title>
 		<meta name="author" content="Michael Kreil">
 		<meta name="viewport" content="width=1024, initial-scale=1">
 		<meta name="apple-mobile-web-app-capable" content="yes"/>
-
+		<link href="style/main.css" rel="stylesheet" />
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<script src="scripts/data_static.js" type="text/javascript" charset="utf-8"></script>
-		
 		<script src="scripts/jquery-1.8.2.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="scripts/modernizr.js" type="text/javascript" charset="utf-8"></script>
 		<script src="scripts/jquery.transit.js" type="text/javascript" charset="utf-8"></script>
@@ -18,35 +18,50 @@
 		<script src="scripts/main.js" type="text/javascript" charset="utf-8"></script>
 		<script src="scripts/search.js" type="text/javascript" charset="utf-8"></script>
 		<script src="scripts/documents.js" type="text/javascript" charset="utf-8"></script>
-		
-		<link href="style/main.css" rel="stylesheet" />
-		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<script src="bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
-		<div id="canvas">
+		<div id="container">
+			<div id="header">
+				<div id="logo"><h1>Die Afghanistan-Papiere</h1></div>
+				<div id="publisher"><p><a href="http://www.derwesten-recherche.org/"><span>WAZ Mediengruppe</span></a></p></div>
+				<div id="menu">
+					<div id="layoutButtons" class="btn-group"></div>
+				</div>
+				<div id="search">
+					<form class="form-search">
+						<div class="input-append">
+							<input id="searchBox" class="span2 search-query" type="text" placeholder="Suche" data-provide="typeahead" autocomplete="off" />
+							<button id="searchReset" type="reset" class="btn">Fertig</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div id="main">
+				<div id="canvas-container">
+					<div id="canvas"></div>
+				</div>
+				<div id="sidebar">
+					<div class="sidebar-item">
+						<h2>Blafasel</h2>
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet bibendum sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus in ornare augue. Duis nisl nulla, mollis nec lacinia at, molestie venenatis eros. 
+						</p>
+					</div>
+					<div class="sidebar-item">
+						<h2>Blafasel</h2>
+						<p>
+							Sauakraud gor Blosmusi Schorsch nix Gwiass woass ma ned Deandlgwand resch Fünferl Freibia wos. Schdarmbeaga See aba Biagadn trihöleridi dijidiholleri gar nia need oamoi ma umananda Steckerleis!
+						</p>
+					</div>
+				</div>
+			</div>
+			<div id="footer">
+				<p>
+					Veröffentlicht durch das <a href="">DerWesten Rechercheblog</a> und <a href="http://www.opendatacity.de/">OpenDataCity</a>
+				</p>
+			</div>
 		</div>
-		<div id="footer">
-			Footer-Text. Copyright-Stuff and Licence and stuff.
-		</div>
-		<div id="menu">
-			<table style="width:100%">
-				<tr>
-					<td style="width:150px" rowspan="2"><img src="style/logo.png"></td>
-					<td style="text-align:center" rowspan="2"><div id="layoutButtons" class="btn-group"></div></td>
-					<td style="text-align:right; width:200px"><img src="style/waz.png"></td>
-				</tr>
-				<tr>
-					<td style="vertical-align: bottom">
-						<form class="form-search" style="margin:0">
-							<div class="input-append">
-								<input id="searchBox" class="span2 search-query" type="text" placeholder="Suche" data-provide="typeahead" autocomplete='off'>
-								<button id="searchReset" type="reset" class="btn">Fertig</button>
-							</div>
-						</form>
-					</td>
-				</tr>
-			</table>
-		</div>
+		<div id="lightbox"></div>
 	</body>
 </html>
