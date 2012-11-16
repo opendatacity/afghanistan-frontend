@@ -45,6 +45,10 @@ function Document(data, index, renderer) {
 
 	var viewObject = renderer.drawImage(imageUrl, 'thumb', color, 'Unterrichtung des Parlaments '+data.title_);
 	
+	$(viewObject).click(function(){
+		Lightbox(data);
+	});
+	
 	viewObject.popover({
 		html:true,
 		content:function () {
