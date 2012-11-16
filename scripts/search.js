@@ -14,37 +14,62 @@ function initSearch() {
 }
 
 function search() {
-	var docs  = [];
-	var pages = [];
-	for (var i = 0; i < $documents.length; i++)  docs[i] = 0;
-	for (var i = 0; i <     $pages.length; i++) pages[i] = 0;
+	var query = $('#searchBox').val();
 	
-	query = $('#searchBox').val();
 	if ($.trim(query) == '') {
-		documents.updateResultMarkers(false);
+		searchReset();
 		return;
 	}
 	
-	query = query.toLowerCase().split(' ');
+	var temp = query.toLowerCase().split(' ');
+	query = [];
+	for (var i = 0; i < temp.length; i++) {
+		if (temp[i] != '') {
+			query.push(temp[i]);
+		}
+	}
+	
+	var pages = [];
+	for (var i = 0; i < $pages.length; i++) pages[i] = [];
 	
 	for (var i = 0; i < query.length; i++) {
 		var searchWord = query[i];
-		if (searchWord != '') {
-			for (var j = 0; j < wordDocuments.length; j++) {
-				var word = wordDocuments[j].word;
-				var d = wordDocuments[j].docs;
+		for (var j = 0; j < wordDocuments.length; j++) {
+			var word = wordDocuments[j].word;
+			if (word.indexOf(searchWord) >= 0) {
 				var p = wordDocuments[j].pages;
-				if (word.indexOf(searchWord) >= 0) {
-					for (var k = 0; k < d.length; k++)  docs[d[k]]++;
-					for (var k = 0; k < p.length; k++) pages[p[k]]++;
+				for (var k = 0; k < p.length; k++) {
+					var l = pages[p[k]];
+					if (l[i] === undefined) {
+						l[i] = 1;
+					} else {
+						l[i]++;
+					}
 				}
 			}
 		}
 	}
 	
-	for (var i = 0; i < $documents.length; i++) $documents[i].resultCount =  docs[i];
-
-	for (var i = 0; i <     $pages.length; i++)     $pages[i].resultCount = pages[i];
+	var n = query.length;
+	for (var i = 0; i < $pages.length; i++) {
+		var min = 1e10;
+		for (var j = 0; j < n; j++) {
+			var v = pages[i][j] || 0;
+			if (min > v) {
+				min = v;
+			}
+		}
+		$pages[i].resultCount = min;
+	}
+	
+	for (var i = 0; i < $documents.length; i++) {
+		var sum = 0;
+		var pageIds = $documents[i].pageIds;
+		for (var j = 0; j < pageIds.length; j++) {
+			sum += $pages[pageIds[j]].resultCount
+		}
+		$documents[i].resultCount = sum / $documents[i].c;
+	}
 		
 	documents.updateResultMarkers(true);
 }
@@ -113,8 +138,6 @@ function initData() {
 		var s = $word_articles[word];
 		
 		var foundPages = [];
-		var docs = [];
-		var usedDocs = {};
 		
 		var id0 = decodeNumber(s, 0, 3);
 		
@@ -122,18 +145,10 @@ function initData() {
 		for (var i = 3; i < s.length; i++) {
 			var d = decodeNumber(s, i, 1);
 			id0 += d;
-			if (d != 63) {
-				foundPages.push(id0);
-				var date = $dates[id0];
-				var docId = date2Document[date[0]][date[1]];
-				if (usedDocs[docId] === undefined) {
-					usedDocs[docId] = true;
-					docs.push(docId);
-				}
-			}
+			if (d != 63) foundPages.push(id0);
 		}
 		
 		var smallWord = word.toLowerCase();
-		wordDocuments.push({word:smallWord, docs:docs, pages:foundPages});
+		wordDocuments.push({word:smallWord, pages:foundPages});
 	}
 }

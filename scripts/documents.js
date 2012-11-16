@@ -19,8 +19,8 @@ function Documents(renderer) {
 	}
 	
 	me.updateResultMarkers = function (showResult) {
-		var max = 0;
 		if (showResult) {
+			var max = 0.0001;
 			for (var i = 0; i < $documents.length; i++) {
 				if (max < $documents[i].resultCount) max = $documents[i].resultCount
 			}
@@ -56,7 +56,7 @@ function Document(data, index, renderer) {
 			var maxY = 0;
 			for (var i = 0; i < data.c; i++) {
 				var resultCount = $pages[data.pageIds[i]].resultCount;
-				var opacity = (resultCount < 1) ? 0.2 : 1;
+				var opacity = (resultCount < 1) ? 0.1 : 1;
 				var t = data.t.charAt(i);
 				var color = qualityToColor(data.quality[i]);
 				var x = (i % 6)*37;
@@ -87,12 +87,11 @@ function Document(data, index, renderer) {
 		if (showResult) {
 			if (data.resultCount <= 0) {
 				opacity = 0.1;
-				scale = 0.4;
 			} else {
-				opacity = 0.2 + 0.8*data.resultCount/max;
+				opacity = Math.min(0.3 + data.resultCount/max, 1);
 			}
 		}
-		viewObject.transition({scale:scale, opacity:opacity, duration:0 });
+		viewObject.transition({opacity:opacity, duration:0 });
 	}
 	
 	return me;
