@@ -1,5 +1,4 @@
 
-var popoverVisible = undefined;
 
 function Documents(renderer) {
 	var me = this;
@@ -30,13 +29,6 @@ function Documents(renderer) {
 			for (var i = 0; i < documents.length; i++) documents[i].updateResultMarker(showResult);
 		}
 	}
-	
-	$(document).click(function(e) {
-		if (popoverVisible !== undefined) {
-			$('.thumb').stop().popover('hide')
-			popoverVisible = undefined
-		}
-	});
 	
 	return me;
 }
