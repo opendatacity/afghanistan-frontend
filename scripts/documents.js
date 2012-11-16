@@ -9,12 +9,17 @@ function Documents(renderer) {
 		documents[i] = new Document($documents[i], i, renderer);
 	}
 	
-	me.setPosition = function (f) {
-		for (var i = 0; i < documents.length; i++) documents[i].setPosition(f);
-	}
-	
-	me.moveToPosition = function (f, duration) {
-		for (var i = 0; i < documents.length; i++) documents[i].moveToPosition(f, 500, (documents.length-i)*1);
+	me.newLayout = function (layout, duration) {
+		var f = layout.projection();
+		var delayFactor = (duration > 0) ? 1 : 0;
+		for (var i = 0; i < documents.length; i++) {
+			documents[i].newPosition(f, duration, delayFactor*(documents.length-i));
+		}
+		$('#canvas').animate({height:layout.maxY+50}, duration);
+		
+		/*$('#canvas-container').animate({height:layout.maxY+50}, duration);
+		*/
+		$('#main').animate({height:layout.maxY+100}, duration);
 	}
 	
 	me.updateResultMarkers = function (showResult) {
@@ -41,6 +46,7 @@ function Documents(renderer) {
 
 function Document(data, index, renderer) {
 	var me = this;
+	me.data = data;
 	var thumbId = data.t.charAt(0);
 	var imageUrl = 'style/thumb'+thumbId+'-transparent.png';
 	var color = qualityToColor(data.qualitySum);
@@ -64,14 +70,14 @@ function Document(data, index, renderer) {
 		placement:'bottom'
 	});
 	
-	me.setPosition = function (f) {
+	me.newPosition = function (f, duration, delay) {
 		var pos = f(index, data);
-		renderer.setPosition(viewObject, pos.x, pos.y);
-	}
-	
-	me.moveToPosition = function (f, duration, delay) {
-		var pos = f(index, data);
-		renderer.moveToPosition(viewObject, pos.x, pos.y, duration, delay);
+		data.pos = pos;
+		if (duration <= 0) {
+			renderer.setPosition(viewObject, pos.x, pos.y);
+		} else {
+			renderer.moveToPosition(viewObject, pos.x, pos.y, duration, delay);
+		}
 	}
 	
 	me.updateResultMarker = function (showResult, max) {

@@ -114,7 +114,6 @@ body {
 			position: relative;
 			margin: 0px;
 			padding: 0px;
-			min-height: 1300px;
 			
 		}
 		
@@ -128,16 +127,13 @@ body {
 				right: 360px;
 
 				margin: 0px;
-				min-height: 1300px;
 				
-
 			}
 			
 				#canvas {
 					
 					position: relative;
-					min-height: 1300px;
-					max-width: 100%;
+					width: 100%;
 
 				}
 				
