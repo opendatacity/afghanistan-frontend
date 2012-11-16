@@ -64,6 +64,10 @@ function Document(data, index, renderer) {
 		placement:'bottom'
 	});
 	
+	$(viewObject).click(function(){
+		Lightbox(data);
+	});
+	
 	me.setPosition = function (f) {
 		var pos = f(index, data);
 		renderer.setPosition(viewObject, pos.x, pos.y);
@@ -135,4 +139,53 @@ $.easing.smooth = function(p) {
 	return p < 0.5 ?
 		Math.pow( p * 2, 3) / 2 :
 		1 - Math.pow( p * -2 + 2, 3 ) / 2;
+}
+
+function Lightbox(data) {
+		
+	console.log(data);
+
+	w = (parseInt(data.w)<10)?'0'+data.w:data.w;
+	
+	$('#lightbox-header').html('<h2>'+data.w+'/'+data.j+'</h2><h3>Seite 1/'+data.c+'</h3>');
+	
+	$('#lightbox-navigation-items').html('');
+	
+	var el,j;
+	
+	$('#lightbox-navigation-items').css({
+		width: ((data.c*40)+40)
+	})
+	
+	for (var i=1; i < data.c; i++) {
+		
+		d = (i<10)?'0'+i:i;
+		el = $('<a href="javascript:;" class="lightbox-item" id="item-'+i+'"></a>');
+		el.data('conf',{
+			w: w,
+			j: data.j,
+			i: i,
+			c: data.c,
+			d: d
+		});
+		el.click(function(){
+			var conf = $(this).data('conf');
+			console.log(conf);
+			$('#lightbox-header').html('<h2>'+conf.w+'/'+conf.j+'</h2><h3>Seite '+conf.i+'/'+conf.c+'</h3>');
+			$('#lightbox-viewport').html('<img src="http://wiki.derwesten-recherche.org/images/'+conf.j+'-'+conf.w+'-'+conf.d+'.png" />');
+			$('.lightbox-item').removeClass('active');
+			$('#item-'+conf.i).addClass('active');
+			
+		});
+		el.append('<img src="http://wiki.derwesten-recherche.org/images/thumb/'+data.j+'-'+w+'-'+d+'.png/90px-'+data.j+'-'+w+'-'+d+'.png" />');
+		$('#lightbox-navigation-items').append(el);
+		
+	}
+	
+	$('#item-1').addClass('active');
+
+	$('#lightbox-viewport').html('<img src="http://wiki.derwesten-recherche.org/images/'+data.j+'-'+w+'-01.png" />')
+	
+	$('#lightbox').show();
+	
 }
