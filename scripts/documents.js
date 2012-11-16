@@ -16,9 +16,6 @@ function Documents(renderer) {
 			documents[i].newPosition(f, duration, delayFactor*(documents.length-i));
 		}
 		$('#canvas').animate({height:layout.maxY+50}, duration);
-		
-		/*$('#canvas-container').animate({height:layout.maxY+50}, duration);
-		*/
 		$('#main').animate({height:layout.maxY+100}, duration);
 	}
 	

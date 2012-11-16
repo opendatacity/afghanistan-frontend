@@ -5,7 +5,7 @@ var layoutingDuration = 500;
 $(function () {
 	initData();
 	
-	$('#layoutButtons').append($('<button class="btn">nach Qualität</button>').click(function () {
+	$('#layoutButtons').append($('<button class="btn active">nach Qualität</button>').click(function () {
 		setLayout(layouts.quality, layoutingDuration);
 	}));
 	$('#layoutButtons').append($('<button class="btn">Quartalsweise</button>').click(function () {
