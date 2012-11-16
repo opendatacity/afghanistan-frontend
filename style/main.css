@@ -1,63 +1,192 @@
 body {
-	 padding: 0;
-	 margin:  0;
-}
-
-#menu {
-	position: fixed;
-	background: #fff;
-	height: 110px;
-	top: 0px;
-	left: -10px;
-	right: -10px;
-	padding: 10px 20px 0 20px;
-	-moz-box-shadow:    0px 3px 5px rgba(0,0,0,0.3);
-	-webkit-box-shadow: 0px 3px 5px rgba(0,0,0,0.3);
-	box-shadow:         0px 3px 5px rgba(0,0,0,0.3);
-	z-index: 10000;
-}
-
-#canvas {
-	margin: 120px 120px 120px;
-	position: relative;
-	min-height: 850px;
-}
-
-#canvas .thumb {
-	width: 21px;
-	height: 30px;
-	position: absolute;
-	border: 1px solid #000;
-	background-repeat:no-repeat;
-	/*
-	-moz-box-shadow:    3px 3px 5px rgba(0,0,0,0.3);
-	-webkit-box-shadow: 3px 3px 5px rgba(0,0,0,0.3);
-	box-shadow:         3px 3px 5px rgba(0,0,0,0.3);
-	*/
-}
-/*
-
-#canvas .thumb img {
-	width: 21px;
-	height: 30px;
-	opacity: 0.5;
-}
-*/
-#canvas .backgroundLabel {
-	position: absolute;
-	color: #aaa;
-	font-size: 30px;
-	border-bottom:1px solid #aaa;
-	height: 30px;
-	width: 635px;
-	padding-top: 10px;
-	z-index: -100;
-}
-
-#footer {
+	
 	display: block;
-	position: relative;
-	margin: 0px;
-	padding: 20px;
-	background-color: #e6e6e6;
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+
 }
+
+	#container {
+	
+		display: block;
+		position: relative;
+		margin: 0px;
+		padding: 130px 0px 0px;
+	
+	}
+
+		#header {
+			
+			display: block;
+			position: fixed;
+			background-color: #fff;
+			left: 0px;
+			right: 0px;
+			top: 0px;
+			height: 110px;
+			padding: 10px 20px 0 20px;
+			-moz-box-shadow:    0px 3px 5px rgba(0,0,0,0.3);
+			-webkit-box-shadow: 0px 3px 5px rgba(0,0,0,0.3);
+			box-shadow:         0px 3px 5px rgba(0,0,0,0.3);
+			z-index: 10000;
+			
+		}
+
+			#logo {
+				
+				display: block;
+				position: absolute;
+				left: 5px;
+				top: 5px;
+				height: 100px;
+				width: 141px;
+				background: url(./logo.png) top left no-repeat;
+				
+			}
+			
+				#logo h1 {
+					
+					display: none;
+					visibility: hidden;
+					
+				}
+				
+			#publisher {
+				
+				display: block;
+				position: absolute;
+				right: 15px;
+				top: 15px;
+				height: 49px;
+				width: 133px;
+				
+			}
+			
+				#publisher p {
+				
+					margin: 0px;
+					padding: 0px;
+					
+				}
+				
+					#publisher p a {
+					
+						display: block;
+						position: relative;
+						margin: 0px;
+						padding: 0px;
+						height: 49px;
+						width: 133px;
+						background: url(./waz.png) top left no-repeat;
+					
+					}
+					
+						#publisher p a span {
+							
+							display: none;
+							visibility: hidden;
+						}
+				
+			#menu {
+				
+				display: block;
+				position: absolute;
+				left: 200px;
+				bottom: 10px;
+				height: 30px;
+				
+			}
+
+			#search {
+	
+				display: block;
+				position: absolute;
+				right: 50px;
+				bottom: 10px;
+				height: 30px;
+	
+			}
+			
+		#main {
+			
+			display: block;
+			position: relative;
+			margin: 0px;
+			padding: 0px;
+			min-height: 1200px;
+			
+		}
+		
+			#canvas-container {
+				
+				display: block;
+				position: absolute;
+				left: 120px;
+				top: 0px;
+				bottom: 0px;
+				right: 380px;
+
+				margin: 0px;
+				min-height: 850px;
+				
+
+			}
+			
+				#canvas {
+					
+					position: relative;
+					min-height: 850px;
+					max-width: 100%;
+
+				}
+				
+					#canvas .thumb {
+
+						width: 21px;
+						height: 30px;
+						position: absolute;
+						border: 1px solid #000;
+						background-repeat: no-repeat;
+
+					}
+
+					#canvas .thumb img {
+						width: 21px;
+						height: 30px;
+						opacity: 0.5;
+					}
+			
+					#canvas .backgroundLabel {
+						position: absolute;
+						color: #aaa;
+						font-size: 30px;
+						border-bottom:1px solid #aaa;
+						height: 30px;
+						width: 635px;
+						padding-top: 10px;
+						z-index: -100;
+					}
+			
+			#sidebar {
+				
+				display: block;
+				position: absolute;
+				top: 0px;
+				bottom: 0px;
+				right: 120px;
+				width: 260px;
+				
+			}
+			
+		#footer {
+			
+			display: block;
+			position: relative;
+			margin: 0px;
+			padding: 20px;
+			height: 24px;
+			line-height: 24px;
+			background-color: #e6e6e6;
+			
+		}
