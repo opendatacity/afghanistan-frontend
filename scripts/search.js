@@ -18,6 +18,11 @@ function search() {
 	for (var i = 0; i < pageCount; i++) docs[i] = 0;
 	
 	query = $('#searchBox').val();
+	if ($.trim(query) == '') {
+		documents.updateResultMarkers(false);
+		return;
+	}
+	
 	query = query.toLowerCase().split(' ');
 	
 	for (var i = 0; i < query.length; i++) {

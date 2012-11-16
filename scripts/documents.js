@@ -17,8 +17,16 @@ function Documents(renderer) {
 		for (var i = 0; i < documents.length; i++) documents[i].moveToPosition(f, 500, (documents.length-i)*1);
 	}
 	
-	me.updateResultMarkers = function (show) {
-		for (var i = 0; i < documents.length; i++) documents[i].updateResultMarker(show);
+	me.updateResultMarkers = function (showResult) {
+		var max = 0;
+		if (showResult) {
+			for (var i = 0; i < $documents.length; i++) {
+				if (max < $documents[i].resultCount) max = $documents[i].resultCount
+			}
+			for (var i = 0; i < documents.length; i++) documents[i].updateResultMarker(showResult, max);
+		} else {
+			for (var i = 0; i < documents.length; i++) documents[i].updateResultMarker(showResult);
+		}
 	}
 	
 	$(document).click(function(e) {
@@ -66,12 +74,19 @@ function Document(data, index, renderer) {
 		renderer.moveToPosition(viewObject, pos.x, pos.y, duration, delay);
 	}
 	
-	me.updateResultMarker = function (show) {
-		if (!show || (data.resultCount > 0)) {
-			viewObject.animate({opacity:1}, 250);
-		} else {
-			viewObject.animate({opacity:0.2}, 250);
+	me.updateResultMarker = function (showResult, max) {
+		var duration = 250;
+		var opacity = 1;
+		var scale = 1;
+		if (showResult) {
+			if (data.resultCount <= 0) {
+				opacity = 0.1;
+				scale = 0.4;
+			} else {
+				opacity = 0.2 + 0.8*data.resultCount/max;
+			}
 		}
+		viewObject.transition({scale:scale, opacity:opacity, duration:0 });
 	}
 	
 	return me;
