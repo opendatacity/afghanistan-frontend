@@ -1,5 +1,4 @@
 
-var popoverVisible = undefined;
 
 function Documents(renderer) {
 	var me = this;
@@ -9,12 +8,14 @@ function Documents(renderer) {
 		documents[i] = new Document($documents[i], i, renderer);
 	}
 	
-	me.setPosition = function (f) {
-		for (var i = 0; i < documents.length; i++) documents[i].setPosition(f);
-	}
-	
-	me.moveToPosition = function (f, duration) {
-		for (var i = 0; i < documents.length; i++) documents[i].moveToPosition(f, 500, (documents.length-i)*1);
+	me.newLayout = function (layout, duration) {
+		var f = layout.projection();
+		var delayFactor = (duration > 0) ? 1 : 0;
+		for (var i = 0; i < documents.length; i++) {
+			documents[i].newPosition(f, duration, delayFactor*(documents.length-i));
+		}
+		$('#canvas').animate({height:layout.maxY+50}, duration);
+		$('#main').animate({height:layout.maxY+100}, duration);
 	}
 	
 	me.updateResultMarkers = function (showResult) {
@@ -29,18 +30,12 @@ function Documents(renderer) {
 		}
 	}
 	
-	$(document).click(function(e) {
-		if (popoverVisible !== undefined) {
-			$('.thumb').stop().popover('hide')
-			popoverVisible = undefined
-		}
-	});
-	
 	return me;
 }
 
 function Document(data, index, renderer) {
 	var me = this;
+	me.data = data;
 	var thumbId = data.t.charAt(0);
 	var imageUrl = 'style/thumb'+thumbId+'-transparent.png';
 	var color = qualityToColor(data.qualitySum);
@@ -50,32 +45,35 @@ function Document(data, index, renderer) {
 
 	var viewObject = renderer.drawImage(imageUrl, 'thumb', color, 'Unterrichtung des Parlaments '+data.title_);
 	
-	var thumbs = [];
-	for (var i = 0; i < data.c; i++) {
-		var t = data.t.charAt(i);
-		var color = qualityToColor(data.quality[i]);
-		thumbs.push('<div class="thumb" style="float:left; position:static; margin:5px; background-color:'+color+'; background-image:url(\'style/thumb'+t+'-transparent.png\')"></div>');
-	}
-	
 	viewObject.popover({
 		html:true,
-		content:thumbs.join('')+'<br clear="both" />',
+		content:function () {
+			var thumbs = [];
+			var maxY = 0;
+			for (var i = 0; i < data.c; i++) {
+				var resultCount = $pages[data.pageIds[i]].resultCount;
+				var opacity = (resultCount < 1) ? 0.2 : 1;
+				var t = data.t.charAt(i);
+				var color = qualityToColor(data.quality[i]);
+				var x = (i % 6)*37;
+				var y = Math.floor(i / 6)*46;
+				thumbs.push('<div class="thumb" style="opacity:'+opacity+';left:'+x+'px; top:'+y+'px; background-color:'+color+'; background-image:url(\'style/thumb'+t+'-transparent.png\')"></div>');
+				if (maxY < y) maxY = y;
+			}
+			return '<div style="position:relative; height:'+(maxY+35)+'px">'+thumbs.join('')+'</div>';
+		},
 		trigger:'hover',
 		placement:'bottom'
 	});
 	
-	$(viewObject).click(function(){
-		Lightbox(data);
-	});
-	
-	me.setPosition = function (f) {
+	me.newPosition = function (f, duration, delay) {
 		var pos = f(index, data);
-		renderer.setPosition(viewObject, pos.x, pos.y);
-	}
-	
-	me.moveToPosition = function (f, duration, delay) {
-		var pos = f(index, data);
-		renderer.moveToPosition(viewObject, pos.x, pos.y, duration, delay);
+		data.pos = pos;
+		if (duration <= 0) {
+			renderer.setPosition(viewObject, pos.x, pos.y);
+		} else {
+			renderer.moveToPosition(viewObject, pos.x, pos.y, duration, delay);
+		}
 	}
 	
 	me.updateResultMarker = function (showResult, max) {
