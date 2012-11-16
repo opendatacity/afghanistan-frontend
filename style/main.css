@@ -18,7 +18,7 @@ body {
 }
 
 #canvas {
-	margin: 120px 120px 120px;
+	margin: 120px 0px 120px 0px;
 	position: relative;
 	min-height: 850px;
 }

@@ -4,10 +4,6 @@ var canvas, renderer, documents, currentLayout;
 $(function () {
 	initData();
 	
-	$('#layoutButtons').append($('<button class="btn">Kompakt</button>').click(function () { 
-		$('#canvas').css('min-height', '850px');
-		setLayout(layouts.compact, 1000);
-	}));
 	$('#layoutButtons').append($('<button class="btn">nach Qualität</button>').click(function () { 
 		$('#canvas').css('min-height', '850px');
 		setLayout(layouts.quality, 1000);
@@ -20,35 +16,26 @@ $(function () {
 	canvas = $('#canvas');
 	renderer = new Renderer(canvas);
 	documents = new Documents(renderer);
-	documents.setPosition(layouts.compact.projection());
-	setLayout(layouts.compact, 0);
+	setLayout(layouts.quality, 0);
 	
 	initSearch();
 });
 
 function setLayout(layout, duration) {
 	if (layout === currentLayout) return;
-	if (currentLayout && currentLayout.end) currentLayout.end(duration);
-	if (layout.init) layout.init(duration);
-	documents.moveToPosition(layout.projection(), duration);
+	if (currentLayout && currentLayout.hide) currentLayout.hide(duration);
+	if (layout.show) layout.show(duration);
+	if (currentLayout === undefined) {
+		documents.setPosition(layout.projection(), duration);
+	} else {
+		documents.moveToPosition(layout.projection(), duration);
+	}
 	currentLayout = layout;
 }
 
 var layouts = {
-	compact: {
-		projection: function () {
-			var w = $('#canvas').innerWidth()-40;
-			var n = Math.floor(w/41);
-			return function (i, data) {
-				return {
-					x: ((307-i) % n)*41+20,
-					y: Math.floor((307-i)/n)*50+20
-				}
-			}
-		}
-	},
 	quality: {
-		init: function () {
+		show: function () {
 			var temp = [];
 			for (var i = 0; i < $documents.length; i++) {
 				temp[i] = {index:i, quality:$documents[i].qualitySum};
@@ -63,13 +50,16 @@ var layouts = {
 			this.lookup = a;
 		},
 		projection: function () {
-			var w = $('#canvas').innerWidth()-40;
+			var w0 = $('#canvas').innerWidth()-40;
+			var w = w0 - 240;
 			var n = Math.floor(w/41);
+			w = n*41 - 20;
+			var x0 = (w0-w)/2;
 			var lookup = this.lookup;
 			return function (index, data) {
 				var i = lookup[index];
 				return {
-					x: ((307-i) % n)*41+20,
+					x: ((307-i) % n)*41+20 + x0,
 					y: Math.floor((307-i)/n)*50+20
 				}
 			}
@@ -77,7 +67,7 @@ var layouts = {
 		lookup: []
 	},
 	quarterly: {
-		init: function (duration) {
+		show: function (duration) {
 			if (!this.labels) {
 				this.labels = $('<div style="display:none"></div>');
 				var projection = this.projection();
@@ -89,7 +79,7 @@ var layouts = {
 			}
 			this.labels.fadeIn(duration);
 		},
-		end: function (duration) {
+		hide: function (duration) {
 			if (this.labels) this.labels.fadeOut(duration);
 		},
 		labels: false,
