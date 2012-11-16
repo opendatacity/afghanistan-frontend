@@ -1,5 +1,6 @@
 
 var canvas, renderer, documents, currentLayout;
+var $pages = [];
 var layoutingDuration = 500;
 
 $(function () {

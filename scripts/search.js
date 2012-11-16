@@ -14,8 +14,10 @@ function initSearch() {
 }
 
 function search() {
-	var docs = [];
-	for (var i = 0; i < pageCount; i++) docs[i] = 0;
+	var docs  = [];
+	var pages = [];
+	for (var i = 0; i < $documents.length; i++)  docs[i] = 0;
+	for (var i = 0; i <     $pages.length; i++) pages[i] = 0;
 	
 	query = $('#searchBox').val();
 	if ($.trim(query) == '') {
@@ -31,25 +33,25 @@ function search() {
 			for (var j = 0; j < wordDocuments.length; j++) {
 				var word = wordDocuments[j].word;
 				var d = wordDocuments[j].docs;
+				var p = wordDocuments[j].pages;
 				if (word.indexOf(searchWord) >= 0) {
-					for (var k = 0; k < d.length; k++) {
-						docs[d[k]]++;
-					}
+					for (var k = 0; k < d.length; k++)  docs[d[k]]++;
+					for (var k = 0; k < p.length; k++) pages[p[k]]++;
 				}
 			}
 		}
 	}
 	
-	for (var i = 0; i < $documents.length; i++) {
-		$documents[i].resultCount = docs[i];
-	}
+	for (var i = 0; i < $documents.length; i++) $documents[i].resultCount =  docs[i];
+
+	for (var i = 0; i <     $pages.length; i++)     $pages[i].resultCount = pages[i];
+		
 	documents.updateResultMarkers(true);
 }
 
 function searchReset() {
-	for (var i = 0; i < $documents.length; i++) {
-		$documents[i].resultCount = 0;
-	}
+	for (var i = 0; i < $documents.length; i++) $documents[i].resultCount = 1;
+	for (var i = 0; i <     $pages.length; i++)     $pages[i].resultCount = 1;
 	documents.updateResultMarkers(false);
 }
 
@@ -76,6 +78,10 @@ function initData() {
 		if (date2Document[doc.j] === undefined) date2Document[doc.j] = [];
 		date2Document[doc.j][doc.w] = i;
 		
+		doc.pageIds = [];
+		for (var j = 0; j < doc.c; j++) {
+			doc.pageIds.push(pageCount+j);
+		}
 		pageCount += doc.c;
 		
 		var week = '00'+doc.w;
@@ -99,23 +105,25 @@ function initData() {
 		doc.qualitySum = Math.pow(qSum/quality.length, 4);
 	}
 	
+	for (var i = 0; i < pageCount; i++) $pages[i] = {};
+	
 	wordDocuments = [];
 	for (var word in $word_articles) {
 		wordList.push(word);
 		var s = $word_articles[word];
 		
-		var pages = [];
+		var foundPages = [];
 		var docs = [];
 		var usedDocs = {};
 		
 		var id0 = decodeNumber(s, 0, 3);
 		
-		pages.push(id0);
+		foundPages.push(id0);
 		for (var i = 3; i < s.length; i++) {
 			var d = decodeNumber(s, i, 1);
 			id0 += d;
 			if (d != 63) {
-				pages.push(id0);
+				foundPages.push(id0);
 				var date = $dates[id0];
 				var docId = date2Document[date[0]][date[1]];
 				if (usedDocs[docId] === undefined) {
@@ -126,6 +134,6 @@ function initData() {
 		}
 		
 		var smallWord = word.toLowerCase();
-		wordDocuments.push({word:smallWord, docs:docs, pages:pages});
+		wordDocuments.push({word:smallWord, docs:docs, pages:foundPages});
 	}
 }
