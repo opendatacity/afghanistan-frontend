@@ -14,6 +14,23 @@ $(function () {
 	}));
 	$('#layoutButtons').append($('<button class="btn">Noch mehr Funktionen demnächst!</button>'));
 	
+	$('#intro-button').click(function(){
+		$('#intro-controls').remove();
+		$('#intro-more').fadeIn('fast');
+	});
+	
+	$('#nav-intro').click(function(){
+		
+		if ($('#intro:hidden').length === 0) {
+			$('#nav-intro').parent().removeClass('active');
+			$('#intro').fadeOut('fast');
+		} else {
+			$('#intro').fadeIn('fast');
+			$('#nav-intro').parent().addClass('active');
+		}
+		
+	})
+
 	$('#impressum').hide();
 	
 	$('#link-impressum').popover({
