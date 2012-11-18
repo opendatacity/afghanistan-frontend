@@ -322,6 +322,12 @@ body {
 			
 			}
 
+			#lightbox-viewport-disqus {
+				
+				padding: 50px;
+				
+			}
+
 			#lightbox-viewport-trans {}
 
 				#lightbox-viewport-trans.loading {
