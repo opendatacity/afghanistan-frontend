@@ -6,12 +6,13 @@ var layoutingDuration = 500;
 $(function () {
 	initData();
 	
-	$('#layoutButtons').append($('<button class="btn active">nach Qualität</button>').click(function () {
-		setLayout(layouts.quality, layoutingDuration);
-	}));
-	$('#layoutButtons').append($('<button class="btn">Quartalsweise</button>').click(function () {
+	$('#layoutButtons').append($('<button class="btn active">Quartalsweise</button>').click(function () {
 		setLayout(layouts.quarterly, layoutingDuration);
 	}));
+	$('#layoutButtons').append($('<button class="btn">Nach Qualität</button>').click(function () {
+		setLayout(layouts.quality, layoutingDuration);
+	}));
+	$('#layoutButtons').append($('<button class="btn">Noch mehr Funktionen demnächst!</button>'));
 	
 	$('#lightbox-controls a').click(function(e){
 		$(this).blur();
@@ -21,7 +22,7 @@ $(function () {
 	canvas = $('#canvas');
 	renderer = new Renderer(canvas);
 	documents = new Documents(renderer);
-	setLayout(layouts.quality, 0);
+	setLayout(layouts.quarterly, 0);
 
 	hashCheck();
 	
