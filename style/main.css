@@ -225,6 +225,13 @@ body {
 			height: 24px;
 			line-height: 24px;
 			background-color: #e6e6e6;
+			text-align: center;
+			
+		}
+		
+			#footer #link-impressum+.popover .popover-content {
+				
+				text-align: left;
 			
 		}
 		

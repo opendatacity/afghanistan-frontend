@@ -14,6 +14,14 @@ $(function () {
 	}));
 	$('#layoutButtons').append($('<button class="btn">Noch mehr Funktionen demnächst!</button>'));
 	
+	$('#impressum').hide();
+	
+	$('#link-impressum').popover({
+		html: true,
+		content: $('#impressum').html(),
+		placement: 'top'
+	});
+	
 	$('#lightbox-controls a').click(function(e){
 		$(this).blur();
 		e.preventDefault();
