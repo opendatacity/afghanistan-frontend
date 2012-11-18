@@ -63,36 +63,44 @@
 			</div>
 		</div>
 		<div id="lightbox">
-			<div id="lightbox-header">
-				<h2>42/2005</h2>
-				<h3>Seite 1</h3>
-			</div>
-			<div id="lightbox-controls">
-				<a href="javascript:;" onclick="$('#lightbox').fadeOut('fast');">Schließen</a>
-			</div>
-			<div id="lightbox-navigation">
-				<div id="lightbox-navigation-items">
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-01.png/90px-2005-42-01.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-02.png/90px-2005-42-02.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-03.png/90px-2005-42-03.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-04.png/90px-2005-42-04.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-05.png/90px-2005-42-05.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-06.png/90px-2005-42-06.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-07.png/90px-2005-42-07.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-08.png/90px-2005-42-08.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-09.png/90px-2005-42-09.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-10.png/90px-2005-42-10.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-11.png/90px-2005-42-11.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-12.png/90px-2005-42-12.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-13.png/90px-2005-42-13.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-14.png/90px-2005-42-14.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-15.png/90px-2005-42-15.png" /></a>
-					<a href="javascript:;"><img src="http://wiki.derwesten-recherche.org/images/thumb/2005-42-16.png/90px-2005-42-16.png" /></a>
-					<div class="clear"></div>
+			<div id="lightbox-header"></div>
+			<div id="lightbox-content">
+				<div id="lightbox-controls">
+					<ul class="nav nav-tabs">
+						<li id="lightbox-control-doc" class="active"><a href="#lightbox-viewport-doc" data-toggle="tab">Original-Dokument</a></li>
+						<li id="lightbox-control-trans"><a href="#lightbox-viewport-trans" data-toggle="tab">Transkript</a></li>
+						<li id="lightbox-control-improve"><a href="#lightbox-viewport-improve" data-toggle="tab">Verbessern</a></li>
+						<li id="lightbox-control-disqus"><a href="#lightbox-viewport-disqus" data-toggle="tab">Kommentieren</a></li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+								Teilen
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:;">Twitter</a></li>
+								<li><a href="javascript:;">Facebook</a></li>
+							</ul>
+						</li>
+					</ul>
+					<a id="lightbox-close" class="btn btn-danger" title="Schließen" href="javascript:;" onclick="$('#lightbox').fadeOut('fast');"><i class="icon-white icon-remove"></i></a>
 				</div>
-			</div>
-			<div id="lightbox-viewport">
-				<img src="http://wiki.derwesten-recherche.org/images/2005-42-05.png" />
+				<div id="lightbox-viewport" class="tab-content">
+					<div class="tab-pane active" id="lightbox-viewport-doc"></div>
+					<div class="tab-pane" id="lightbox-viewport-trans"></div>
+					<div class="tab-pane" id="lightbox-viewport-improve">
+						<h2>Verbessern</h2>
+						<p>
+							Du möchtest mithelfen eine Seite zu transkribieren oder einen Fehler korrigieren? Hier steht ein super-motivierender Erklär-Text, der erläutert, wie das geht.
+						</p>
+						<p>
+							<a class="btn btn-primary btn-large" id="lightbox-viewport-improve-button" href="javascript:;">Transkript bearbeiten</a>
+						</p>
+					</div>
+					<div class="tab-pane" id="lightbox-viewport-disqus"></div>
+				</div>
+				<div id="lightbox-navigation">
+					<div id="lightbox-navigation-items"></div>
+				</div>
 			</div>
 		</div>
 	</body>

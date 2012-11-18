@@ -13,6 +13,11 @@ $(function () {
 		setLayout(layouts.quarterly, layoutingDuration);
 	}));
 	
+	$('#lightbox-controls a').click(function(e){
+		$(this).blur();
+		e.preventDefault();
+	});
+	
 	canvas = $('#canvas');
 	renderer = new Renderer(canvas);
 	documents = new Documents(renderer);
