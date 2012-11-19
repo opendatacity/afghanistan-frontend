@@ -2,6 +2,7 @@
 var canvas, renderer, documents, documentsIndex, currentDoc, currentLayout;
 var $pages = [];
 var layoutingDuration = 500;
+var disqus_shortname, disqus_identifier, disqus_url, disqus_title;
 
 $(function () {
 	initData();
@@ -54,6 +55,17 @@ $(function () {
 	$('#share-google').click(function(){
 		window.open($(this).attr('href'), "share", "width=500,height=300,status=no,scrollbars=no,resizable=no,menubar=no,toolbar=no");	
 	});
+	
+	disqus_shortname = 'afgpa';
+ 	disqus_identifier = (location.hash === "" || location.hash === "#") ? "default" : location.hash;
+ 	disqus_url = location.href;
+	disqus_title = "Kommentare";
+
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
 	
 	canvas = $('#canvas');
 	renderer = new Renderer(canvas);
