@@ -260,7 +260,7 @@ function LightboxPage(issue,page) {
 
 function hashCheck() {
 		
-	if (location.hash && location.hash.substr(3).match(/^20[0-9]{2}-[0-9]{2}-[0-9]{2}/) && documentsIndex.hasOwnProperty(location.hash.substr(1,7))) {
+	if (location.hash && location.hash.substr(3,10).match(/^20[0-9]{2}-[0-9]{2}-[0-9]{2}/) && documentsIndex.hasOwnProperty(location.hash.substr(3,7))) {
 		
 		Lightbox(location.hash.substr(3));
 		
