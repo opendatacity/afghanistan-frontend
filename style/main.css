@@ -120,7 +120,7 @@ body {
 			}
 			
 			#intro-close {
-	
+				
 				display: block;
 				position: absolute;
 				right: 15px;
@@ -252,12 +252,41 @@ body {
 			
 		}
 		
+			#footer #link-impressum+.popover {
+				
+				width: 400px;
+				
+			}
+		
 			#footer #link-impressum+.popover .popover-content {
 				
 				text-align: left;
-			
-		}
-		
+				
+			}
+
+			#footer #link-impressum+.popover .popover-content h2 {
+
+				font-size: 15px;
+				line-height: 18px;
+				margin: 0px;
+				padding: 0px;
+
+			}
+
+			#footer #link-impressum+.popover .popover-content p {
+
+				font-size: 12px;
+				line-height: 1.6em;
+
+			}
+
+
+			#footer #link-impressum+.popover .popover-content p+h2 {
+
+				margin-top: 10px;
+
+			}
+
 	#lightbox {
 		
 		display: none;
@@ -321,7 +350,7 @@ body {
 				padding: 50px;
 			
 			}
-
+			
 			#lightbox-viewport-disqus {
 				
 				padding: 50px;
@@ -430,7 +459,7 @@ body {
 					box-shadow: 0px 0px 20px -10px rgba(0,0,0,0.5);
 					
 				}
-	
+					
 .clear {
 
 	clear: both;
