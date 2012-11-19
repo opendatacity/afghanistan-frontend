@@ -222,7 +222,7 @@ function LightboxPage(issue,page) {
 	$('#lightbox-viewport-trans').addClass('loading');
 	
 	$.ajax({
-		url: 'data/t/'+issue+'-'+page+'.json',
+		url: '/data/t/'+issue+'-'+page+'.json',
 		method: 'GET',
 		contentType: 'json',
 		success: function(data) {
