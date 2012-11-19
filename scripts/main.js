@@ -12,7 +12,7 @@ $(function () {
 	$('#layoutButtons').append($('<button class="btn">Nach Qualität</button>').click(function () {
 		setLayout(layouts.quality, layoutingDuration);
 	}));
-	$('#layoutButtons').append($('<button class="btn">Kartenansicht</button>'));
+	/*$('#layoutButtons').append($('<button class="btn">Kartenansicht</button>'));*/
 	$('#layoutButtons').append($('<button class="btn">Noch mehr Funktionen demnächst!</button>'));
 	
 	$('#intro-button').click(function(){
