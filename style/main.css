@@ -58,8 +58,8 @@ body {
 				position: absolute;
 				right: 15px;
 				top: 40px;
-				height: 49px;
-				width: 133px;
+				height: 70px;
+				width: 225px;
 				
 			}
 			
@@ -76,9 +76,9 @@ body {
 						position: relative;
 						margin: 0px;
 						padding: 0px;
-						height: 49px;
-						width: 133px;
-						background: url(./waz.png) top left no-repeat;
+						height: 70px;
+						width: 225px;
+						background: url(./waz-logo.png) top left no-repeat;
 					
 					}
 					
