@@ -44,6 +44,16 @@ $(function () {
 		e.preventDefault();
 	});
 	
+	$('#share-twitter').click(function(){
+		window.open($(this).attr('href'), "share", "width=500,height=300,status=no,scrollbars=no,resizable=no,menubar=no,toolbar=no");	
+	});
+	$('#share-facebook').click(function(){
+		window.open($(this).attr('href'), "share", "width=500,height=300,status=no,scrollbars=no,resizable=no,menubar=no,toolbar=no");	
+	});
+	$('#share-google').click(function(){
+		window.open($(this).attr('href'), "share", "width=500,height=300,status=no,scrollbars=no,resizable=no,menubar=no,toolbar=no");	
+	});
+	
 	canvas = $('#canvas');
 	renderer = new Renderer(canvas);
 	documents = new Documents(renderer);
@@ -79,6 +89,7 @@ $(function () {
 	})())
 		
 	initSearch();
+	
 });
 
 function relayout(duration) {
