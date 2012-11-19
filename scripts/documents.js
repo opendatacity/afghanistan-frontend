@@ -180,7 +180,7 @@ function Lightbox(h) {
 			$lbel.data({issue:issue,page:d});
 			$lbel.click(function(){
 				$(this).blur();
-				location.hash=$(this).data('issue')+'-'+$(this).data('page');
+				location.hash='!/'+$(this).data('issue')+'-'+$(this).data('page');
 				LightboxPage($(this).data('issue'), $(this).data('page'));
 			});
 			$lbel.tooltip({
@@ -208,7 +208,7 @@ function LightboxPage(issue,page) {
 		return;
 	} else {
 		currentDoc = issue+'-'+page;
-		location.hash = issue+'-'+page;
+		location.hash = '!/'+issue+'-'+page;
 	}
 
 	var conf = $('#lightbox').data();
@@ -247,9 +247,9 @@ function LightboxPage(issue,page) {
 
 function hashCheck() {
 		
-	if (location.hash && location.hash.substr(1).match(/^20[0-9]{2}-[0-9]{2}-[0-9]{2}/) && documentsIndex.hasOwnProperty(location.hash.substr(1,7))) {
+	if (location.hash && location.hash.substr(3).match(/^20[0-9]{2}-[0-9]{2}-[0-9]{2}/) && documentsIndex.hasOwnProperty(location.hash.substr(1,7))) {
 		
-		Lightbox(location.hash.substr(1));
+		Lightbox(location.hash.substr(3));
 		
 	}
 	
