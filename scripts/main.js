@@ -1,5 +1,5 @@
 
-var canvas, renderer, documents, documentsIndex, currentLayout;
+var canvas, renderer, documents, documentsIndex, currentDoc, currentLayout;
 var $pages = [];
 var layoutingDuration = 500;
 

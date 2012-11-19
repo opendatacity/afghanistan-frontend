@@ -180,6 +180,7 @@ function Lightbox(h) {
 			$lbel.data({issue:issue,page:d});
 			$lbel.click(function(){
 				$(this).blur();
+				location.hash=$(this).data('issue')+'-'+$(this).data('page');
 				LightboxPage($(this).data('issue'), $(this).data('page'));
 			});
 			$lbel.tooltip({
@@ -202,6 +203,13 @@ function Lightbox(h) {
 }
 
 function LightboxPage(issue,page) {
+
+	if (currentDoc === issue+'-'+page) {
+		return;
+	} else {
+		currentDoc = issue+'-'+page;
+		location.hash = issue+'-'+page;
+	}
 
 	var conf = $('#lightbox').data();
 	
@@ -234,7 +242,6 @@ function LightboxPage(issue,page) {
 	
 	$('.lightbox-item').removeClass('active');
 	$('#lightbox-item-'+issue+'-'+page).addClass('active');
-	location.hash=issue+'-'+page;
 
 }
 
