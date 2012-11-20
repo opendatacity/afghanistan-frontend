@@ -7,8 +7,7 @@ var
 	$word_articles = {};
 
 function initSearch() {
-	
-	$.getJSON('data/word_articles.json', function (data) {
+	var jqxhr = $.ajax('data/word_articles.json', {dataType:'json'}).done(function(data) {
 		$word_articles = data;
 	
 		wordDocuments = [];
