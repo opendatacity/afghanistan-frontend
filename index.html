@@ -31,6 +31,7 @@
 						<li class="active"><a id="nav-intro" href="javascript:;">Was soll das?</a></li>
 						<li><a href="http://wiki.derwesten-recherche.org/">Mithelfen</a></li>
 						<li><a href="javascript:;">FAQ</a></li>
+						<li><a href="javascript:;" onclick="$('#download-container').fadeIn('fast');">Download</a></li>
 					</ul>
 				</div>
 			</div>
@@ -79,8 +80,49 @@
 			</div>
 			<div id="footer">
 				<p>
-					Veröffentlicht durch das <a href="http://www.derwesten-recherche.org/">DerWesten Rechercheblog</a> &middot; Realisiert von <a href="http://www.opendatacity.de/">OpenDataCity</a> &middot; <a title="Impressum" href="#impressum" id="link-impressum">Impressum</a> &middot; <a href="" class="btn btn-small btn-info">Download als Zip-Archiv</a> <a href="" class="btn btn-small btn-info">Download via BitTorrent</a> 
+					Veröffentlicht durch das <a href="http://www.derwesten-recherche.org/">DerWesten Rechercheblog</a> &middot; Realisiert von <a href="http://www.opendatacity.de/">OpenDataCity</a> &middot; <a title="Impressum" href="#impressum" id="link-impressum">Impressum</a> 
 				</p>
+			</div>
+		</div>
+		<div id="download-container">
+			<div id="download">
+				<h2>Download</h2>
+				<p>Für den Fall dass sie diese Dokumente offline lesen oder zu eigenen Zwecken weiterverwenden möchten, bieten diese als OpenData zum Download an. </p>
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Beschreibung</th>
+							<th>Größe</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><strong>Dokumente</strong></td>
+							<td>Alle Dokumente als Grafiken</td>
+							<td>319 MB</td>
+							<td><a href="download/DieAfghanistanPapiere-Dokumente.zip" class="btn btn-small btn-info">Download als Zip-Archiv</a></td>
+							<td><a href="download/DieAfghanistanPapiere-Dokumente.torrent" class="btn btn-small btn-info">Download via BitTorrent</a></td>
+						</tr>
+						<tr>
+							<td><strong>Texte</strong></td>
+							<td>Alle Transkripte als Textdateien</td>
+							<td>2,6 MB</td>
+							<td><a href="download/DieAfghanistanPapiere-Text.zip" class="btn btn-small btn-info">Download als Zip-Archiv</a></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><strong>Mirror</strong></td>
+							<td>Eine Kopie dieser Webseite (ohne Wiki)</td>
+							<td>723 MB</td>
+							<td><a href="download/DieAfghanistanPapiere-Mirror.zip" class="btn btn-small btn-info">Download als Zip-Archiv</a></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<a id="download-close" class="btn" title="Schließen" href="javascript:;" onclick="$('#download-container').fadeOut('fast');"><i class="icon-remove"></i></a>
 			</div>
 		</div>
 		<div id="impressum">
