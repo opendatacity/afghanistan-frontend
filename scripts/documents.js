@@ -1,4 +1,4 @@
-
+var allPageIds = [];
 
 function Documents(renderer) {
 	var me = this;
@@ -38,7 +38,6 @@ function Documents(renderer) {
 }
 
 function showReader(pageId) {
-	$('.thumb').popover('hide');
 	Lightbox(pageId);
 }
 
@@ -53,6 +52,14 @@ function Document(data, index, renderer) {
 	}
 
 	var viewObject = renderer.drawImage(imageUrl, 'thumb', color, 'Unterrichtung des Parlaments '+data.title_);
+	
+	$(viewObject).click(function(){
+		Lightbox(data.title+"-01");
+	});
+	
+	for (var z = 0; z < data.c; z++) {
+		allPageIds.push(data.title + '-' + (z<10) ? '0'+z : z);
+	}
 	
 	viewObject.popover({
 		html:true,
@@ -245,8 +252,8 @@ function LightboxPage(issue,page) {
 
 	$('#lightbox-viewport-improve-button').attr('href','http://wiki.derwesten-recherche.org/index.php?title='+issue+'-'+page+'&action=edit');
 	
-	$('#share-twitter').attr('href','https://twitter.com/intent/tweet?url=http%3A%2F%2Fafghanistan.derwesten-recherche.de%2F%23%21%2F'+issue+'-'+page+'&text=Die+Afghansistan+Papiere%2C+Ausgabe+'+conf.week+'%2F'+conf.year+'+Seite+'+page+'+%23afghanistan+%23leak&via=wazrechereche&related=wazrechereche');
-	$('#share-facebook').attr('href','http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fafghanistan.derwesten-recherche.de%2F%23%21%2F'+issue+'-'+page+'&t=Die+Afghansistan+Papiere%2C+Ausgabe+'+conf.week+'%2F'+conf.year+'+Seite+'+page);
+	$('#share-twitter').attr('href','https://twitter.com/intent/tweet?url=http%3A%2F%2Fafghanistan.derwesten-recherche.de%2F%23%21%2F'+issue+'-'+page+'&text=Die+Afghanistan+Papiere%2C+Ausgabe+'+conf.week+'%2F'+conf.year+'+Seite+'+page+'+%23afghanistan+%23leak&via=wazrechereche&related=wazrechereche');
+	$('#share-facebook').attr('href','http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fafghanistan.derwesten-recherche.de%2F%23%21%2F'+issue+'-'+page+'&t=Die+Afghanistan+Papiere%2C+Ausgabe+'+conf.week+'%2F'+conf.year+'+Seite+'+page);
 	$('#share-google').attr('href','https://plus.google.com/share?url=http%3A%2F%2Fafghanistan.derwesten-recherche.de%2F%23%21%2F'+issue+'-'+page);
 
  	disqus_identifier = currentDoc;
@@ -275,4 +282,8 @@ function hashCheck() {
 		
 	}
 	
+}
+
+function randomDoc() {
+	return allPageIds[(Math.floor(Math.random()*10000000) % allPageIds.length)];
 }
