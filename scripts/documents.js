@@ -113,12 +113,21 @@ function Document(data, index, renderer) {
 	return me;
 }
 
+var gradient = [
+	[255, 255,  50],
+	[  0, 242, 250],
+	[  0,   0,  50]
+];
 
-function qualityToColor(v) {
-	// rot, gelb, grün
-	var r = Math.round((v < 1 ? 1 : 2-v)*255);
-	var g = Math.round((v < 1 ? v : 1  )*255);
-	var b = 0;
+function qualityToColor(v, lightness) {
+	if (lightness === undefined) lightness = 1;
+	var i = Math.floor(v);
+	if (i > 1) i = 1;
+	v = (v - i);
+	
+	var r = Math.round(((gradient[0][i+1]-gradient[0][i])*v + gradient[0][i])*lightness);
+	var g = Math.round(((gradient[1][i+1]-gradient[1][i])*v + gradient[1][i])*lightness);
+	var b = Math.round(((gradient[2][i+1]-gradient[2][i])*v + gradient[2][i])*lightness);
 	return 'rgb('+r+','+g+','+b+')';
 }
 
@@ -184,10 +193,13 @@ function Lightbox(h) {
 		
 		for (var i=1; i <= data.c; i++) {
 			
-			d = (i<10)?'0'+i:i;
+			d = (i<10) ? '0'+i : i;
 			
-			$lbel = $('<a href="javascript:;" class="lightbox-item" id="lightbox-item-'+issue+'-'+d+'">irks</a>');
-			$lbel.data({issue:issue,page:d});
+			var opacity = ($pages[data.pageIds[i-1]].resultCount < 1) ? 0.6 : 1;
+			var color = qualityToColor(data.quality[i-1]);
+			
+			$lbel = $('<a href="javascript:;" class="lightbox-item" id="lightbox-item-'+issue+'-'+d+'" style="background-color:'+color+'; border-color:'+color+'; color:'+color+'; opacity:'+opacity+'"></a>');
+			$lbel.data({ issue:issue, page:d });
 			$lbel.click(function(){
 				$(this).blur();
 				location.hash='!/'+$(this).data('issue')+'-'+$(this).data('page');
@@ -197,9 +209,10 @@ function Lightbox(h) {
 				title: "Seite "+i,
 				placement: "top"
 			});
-			$lbel.append('<img src="data/images/thumb/'+issue+'-'+d+'.png/90px-'+issue+'-'+d+'.png" />');
+			
+			$lbel.append('<img src="data/images/thumb/'+issue+'-'+d+'.png/90px-'+issue+'-'+d+'.png">');
+			
 			$lbnav.append($lbel);
-
 		}
 
 		$lbnav.css({width: (data.c*40 + 60)});
@@ -212,7 +225,7 @@ function Lightbox(h) {
 	
 }
 
-function LightboxPage(issue,page) {
+function LightboxPage(issue, page) {
 
 	if (currentDoc === issue+'-'+page) {
 		return;
@@ -224,7 +237,6 @@ function LightboxPage(issue,page) {
 	var conf = $('#lightbox').data();
 	
 	$('#lightbox-headline').html('<h2>'+conf.week+'/'+conf.year+' <small>Seite '+parseInt(page,10)+'/'+conf.pages+'</small></h2>');
-	$('#lightbox-viewport-doc').html('<img src="/data/images/'+issue+'-'+page+'.png" />');
 
 	$('#lightbox-viewport-doc').html('<img src="data/images/'+issue+'-'+page+'.png" />');
 	
@@ -257,10 +269,10 @@ function LightboxPage(issue,page) {
 		DISQUS.reset({
 			reload: true,
 			config: function () {  
-			    this.page.identifier = disqus_identifier;  
-			    this.page.url = location.href;
+				this.page.identifier = disqus_identifier;  
+				this.page.url = location.href;
 				this.page.title = disqus_title;
-			  }
+			}
 		});
 	}
 	
