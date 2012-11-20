@@ -32,6 +32,7 @@ function initSearch() {
 			
 		$('#searchBox')
 			.removeAttr('disabled')
+			.attr('placeholder', 'Suche')
 			.change(search)
 			.keyup(search)
 			.typeahead({source:wordList});
