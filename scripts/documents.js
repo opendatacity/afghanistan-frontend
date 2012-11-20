@@ -250,14 +250,16 @@ function LightboxPage(issue,page) {
  	disqus_url = location.href;
 	disqus_title = "Die Afghanistan Papiere "+conf.week+'/'+conf.year+' Seite '+page;
 	
-	DISQUS.reset({
-		reload: true,
-		config: function () {  
-		    this.page.identifier = disqus_identifier;  
-		    this.page.url = location.href;
-			this.page.title = disqus_title;
-		  }
-	});
+	if (typeof DISQUS !== "undefined") {	
+		DISQUS.reset({
+			reload: true,
+			config: function () {  
+			    this.page.identifier = disqus_identifier;  
+			    this.page.url = location.href;
+				this.page.title = disqus_title;
+			  }
+		});
+	}
 	
 	$('.lightbox-item').removeClass('active');
 	$('#lightbox-item-'+issue+'-'+page).addClass('active');
