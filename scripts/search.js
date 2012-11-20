@@ -3,14 +3,42 @@ var
 	wordList = [],
 	wordDocuments = {},
 	pageCount = 0,
-	date2Document = [];
+	date2Document = [],
+	$word_articles = {};
 
 function initSearch() {
-	$('#searchBox')
-		.change(search)
-		.keyup(search)
-		.typeahead({source:wordList});
-	$('#searchReset').click(searchReset);
+	
+	$.getJSON('data/word_articles.json', function (data) {
+		$word_articles = data;
+	
+		wordDocuments = [];
+		for (var word in $word_articles) {
+			wordList.push(word);
+			var s = $word_articles[word];
+			
+			var foundPages = [];
+			
+			var id0 = decodeNumber(s, 0, 3);
+			
+			foundPages.push(id0);
+			for (var i = 3; i < s.length; i++) {
+				var d = decodeNumber(s, i, 1);
+				id0 += d;
+				if (d != 63) foundPages.push(id0);
+			}
+			
+			var smallWord = word.toLowerCase();
+			wordDocuments.push({word:smallWord, pages:foundPages});
+		}
+			
+		$('#searchBox')
+			.removeAttr('disabled')
+			.change(search)
+			.keyup(search)
+			.typeahead({source:wordList});
+		$('#searchReset').click(searchReset);
+		
+	});
 }
 
 function search() {
@@ -137,24 +165,4 @@ function initData() {
 	}
 	
 	for (var i = 0; i < pageCount; i++) $pages[i] = {};
-	
-	wordDocuments = [];
-	for (var word in $word_articles) {
-		wordList.push(word);
-		var s = $word_articles[word];
-		
-		var foundPages = [];
-		
-		var id0 = decodeNumber(s, 0, 3);
-		
-		foundPages.push(id0);
-		for (var i = 3; i < s.length; i++) {
-			var d = decodeNumber(s, i, 1);
-			id0 += d;
-			if (d != 63) foundPages.push(id0);
-		}
-		
-		var smallWord = word.toLowerCase();
-		wordDocuments.push({word:smallWord, pages:foundPages});
-	}
 }
