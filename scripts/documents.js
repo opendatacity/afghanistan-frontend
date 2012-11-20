@@ -215,7 +215,6 @@ function LightboxPage(issue,page) {
 	
 	$('#lightbox-header').html('<h2>'+conf.week+'/'+conf.year+'</h2><h3>Seite '+page+'/'+conf.pages+'</h3>');
 	$('#lightbox-viewport-doc').html('<img src="http://wiki.derwesten-recherche.org/images/'+issue+'-'+page+'.png" />');
-	//'<div id="lightbox-viewport-navigation"><a href="http://wiki.derwesten-recherche.org/wiki/'+issue+'-'+page+'">Transkript ansehen</a></div>');
 
 	$('#lightbox-viewport-doc').html('<img src="http://wiki.derwesten-recherche.org/images/'+issue+'-'+page+'.png" />');
 	
