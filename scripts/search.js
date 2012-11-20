@@ -16,11 +16,13 @@ function initSearch() {
 function search() {
 	var query = $('#searchBox').val();
 	
+	// Wenn nichts gesucht wird, dann die Suche zurück setzen.
 	if ($.trim(query) == '') {
 		searchReset();
 		return;
 	}
 	
+	// Welche gültigen Suchbegriffe werden verwendet
 	var temp = query.toLowerCase().split(' ');
 	query = [];
 	for (var i = 0; i < temp.length; i++) {
@@ -29,9 +31,11 @@ function search() {
 		}
 	}
 	
+	// gefundenen Seiten initialisieren
 	var pages = [];
 	for (var i = 0; i < $pages.length; i++) pages[i] = [];
 	
+	// Suchbegriffe durchsuchen
 	for (var i = 0; i < query.length; i++) {
 		var searchWord = query[i];
 		for (var j = 0; j < wordDocuments.length; j++) {
@@ -50,6 +54,7 @@ function search() {
 		}
 	}
 	
+	// gefundene Seiten sind nur die, auf denen alle Suchbegriffe vorkommen
 	var n = query.length;
 	for (var i = 0; i < $pages.length; i++) {
 		var min = 1e10;
@@ -62,6 +67,7 @@ function search() {
 		$pages[i].resultCount = min;
 	}
 	
+	// gefundene Dokumente sind nur die, die eine "gefundene Seite" enthalten
 	for (var i = 0; i < $documents.length; i++) {
 		var sum = 0;
 		var pageIds = $documents[i].pageIds;
