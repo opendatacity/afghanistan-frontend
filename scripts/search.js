@@ -3,24 +3,54 @@ var
 	wordList = [],
 	wordDocuments = {},
 	pageCount = 0,
-	date2Document = [];
+	date2Document = [],
+	$word_articles = {};
 
 function initSearch() {
-	$('#searchBox')
-		.change(search)
-		.keyup(search)
-		.typeahead({source:wordList});
-	$('#searchReset').click(searchReset);
+	
+	$.getJSON('data/word_articles.json', function (data) {
+		$word_articles = data;
+	
+		wordDocuments = [];
+		for (var word in $word_articles) {
+			wordList.push(word);
+			var s = $word_articles[word];
+			
+			var foundPages = [];
+			
+			var id0 = decodeNumber(s, 0, 3);
+			
+			foundPages.push(id0);
+			for (var i = 3; i < s.length; i++) {
+				var d = decodeNumber(s, i, 1);
+				id0 += d;
+				if (d != 63) foundPages.push(id0);
+			}
+			
+			var smallWord = word.toLowerCase();
+			wordDocuments.push({word:smallWord, pages:foundPages});
+		}
+			
+		$('#searchBox')
+			.removeAttr('disabled')
+			.change(search)
+			.keyup(search)
+			.typeahead({source:wordList});
+		$('#searchReset').click(searchReset);
+		
+	});
 }
 
 function search() {
 	var query = $('#searchBox').val();
 	
+	// Wenn nichts gesucht wird, dann die Suche zurück setzen.
 	if ($.trim(query) == '') {
 		searchReset();
 		return;
 	}
 	
+	// Welche gültigen Suchbegriffe werden verwendet
 	var temp = query.toLowerCase().split(' ');
 	query = [];
 	for (var i = 0; i < temp.length; i++) {
@@ -29,9 +59,11 @@ function search() {
 		}
 	}
 	
+	// gefundenen Seiten initialisieren
 	var pages = [];
 	for (var i = 0; i < $pages.length; i++) pages[i] = [];
 	
+	// Suchbegriffe durchsuchen
 	for (var i = 0; i < query.length; i++) {
 		var searchWord = query[i];
 		for (var j = 0; j < wordDocuments.length; j++) {
@@ -50,6 +82,7 @@ function search() {
 		}
 	}
 	
+	// gefundene Seiten sind nur die, auf denen alle Suchbegriffe vorkommen
 	var n = query.length;
 	for (var i = 0; i < $pages.length; i++) {
 		var min = 1e10;
@@ -62,6 +95,7 @@ function search() {
 		$pages[i].resultCount = min;
 	}
 	
+	// gefundene Dokumente sind nur die, die eine "gefundene Seite" enthalten
 	for (var i = 0; i < $documents.length; i++) {
 		var sum = 0;
 		var pageIds = $documents[i].pageIds;
@@ -131,24 +165,4 @@ function initData() {
 	}
 	
 	for (var i = 0; i < pageCount; i++) $pages[i] = {};
-	
-	wordDocuments = [];
-	for (var word in $word_articles) {
-		wordList.push(word);
-		var s = $word_articles[word];
-		
-		var foundPages = [];
-		
-		var id0 = decodeNumber(s, 0, 3);
-		
-		foundPages.push(id0);
-		for (var i = 3; i < s.length; i++) {
-			var d = decodeNumber(s, i, 1);
-			id0 += d;
-			if (d != 63) foundPages.push(id0);
-		}
-		
-		var smallWord = word.toLowerCase();
-		wordDocuments.push({word:smallWord, pages:foundPages});
-	}
 }
