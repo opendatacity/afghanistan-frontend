@@ -65,6 +65,15 @@ $(function () {
 		window.open($(this).attr('href'), "share", "width=500,height=300,status=no,scrollbars=no,resizable=no,menubar=no,toolbar=no");	
 	});
 	
+	$('#download-document').click(function(){
+		var d = $('#lightbox').data();
+		location.href="data/images/"+d.issue+"-"+d.page+".png?download";
+	});
+	$('#download-text').click(function(){
+		var d = $('#lightbox').data();
+		location.href="download/text/"+d.issue+".txt?download";
+	});
+	
 	disqus_shortname = 'afgpa';
  	disqus_identifier = (location.hash === "" || location.hash === "#") ? "default" : location.hash;
  	disqus_url = location.href;
