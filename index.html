@@ -84,6 +84,75 @@
 				</p>
 			</div>
 		</div>
+		<div id="lightbox">
+			<div id="lightbox-header"></div>
+			<div id="lightbox-content">
+				<div id="lightbox-controls">
+					<ul class="nav nav-tabs">
+						<li id="lightbox-control-doc" class="active"><a href="#lightbox-viewport-doc" data-toggle="tab">Original-Dokument</a></li>
+						<li id="lightbox-control-trans"><a href="#lightbox-viewport-trans" data-toggle="tab">Transkript</a></li>
+						<li id="lightbox-control-improve"><a href="#lightbox-viewport-improve" data-toggle="tab">Verbessern</a></li>
+						<li id="lightbox-control-disqus"><a href="#lightbox-viewport-disqus" data-toggle="tab">Kommentieren</a></li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+								Download
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:;" id="download-document">Dokument (png)</a></li>
+								<li><a href="javascript:;" id="download-text">Transkript (txt)</a></li>
+							</ul>
+						</li>
+						<!--
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+								Navigation
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:;" id="nav-prev-page">Vorherige Seite</a></li>
+								<li><a href="javascript:;" id="nav-next-page">Nächste Seite</a></li>
+								<li class="divider"></li>
+								<li><a href="javascript:;" id="nav-prev-doc">Vorherige Ausgabe</a></li>
+								<li><a href="javascript:;" id="nav-next-doc">Nächste Ausgabe</a></li>
+							</ul>
+						</li>
+						-->
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+								Teilen
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:;" id="share-twitter">Twitter</a></li>
+								<li><a href="javascript:;" id="share-facebook">Facebook</a></li>
+								<li><a href="javascript:;" id="share-google">Google+</a></li>
+							</ul>
+						</li>
+					</ul>
+					<a id="lightbox-close" class="btn btn-danger" title="Schließen" href="javascript:;" onclick="$('#lightbox').fadeOut('fast');location.hash='';"><i class="icon-white icon-remove"></i></a>
+				</div>
+				<div id="lightbox-viewport" class="tab-content">
+					<div class="tab-pane active" id="lightbox-viewport-doc"></div>
+					<div class="tab-pane" id="lightbox-viewport-trans"></div>
+					<div class="tab-pane" id="lightbox-viewport-improve">
+						<h2>Verbessern</h2>
+						<p>
+							Du möchtest mithelfen eine Seite zu transkribieren oder einen Fehler korrigieren? Hier steht ein super-motivierender Erklär-Text, der erläutert, wie das geht.
+						</p>
+						<p>
+							<a class="btn btn-primary btn-large" id="lightbox-viewport-improve-button" href="javascript:;">Transkript bearbeiten</a>
+						</p>
+					</div>
+					<div class="tab-pane" id="lightbox-viewport-disqus">
+						<div id="disqus_thread"></div>
+					</div>
+				</div>
+				<div id="lightbox-navigation">
+					<div id="lightbox-navigation-items"></div>
+				</div>
+			</div>
+		</div>
 		<div id="download-container">
 			<div id="download">
 				<h2>Download</h2>
@@ -203,50 +272,6 @@
 				Blog: <a href="http://derwesten.de/recherche">derwesten.de/recherche</a>
 			</p>
 			<p><a href="https://upload.derwesten-recherche.org">Anonym Hinweise und Dokumente hochladen</a></p>
-		</div>
-		<div id="lightbox">
-			<div id="lightbox-header"></div>
-			<div id="lightbox-content">
-				<div id="lightbox-controls">
-					<ul class="nav nav-tabs">
-						<li id="lightbox-control-doc" class="active"><a href="#lightbox-viewport-doc" data-toggle="tab">Original-Dokument</a></li>
-						<li id="lightbox-control-trans"><a href="#lightbox-viewport-trans" data-toggle="tab">Transkript</a></li>
-						<li id="lightbox-control-improve"><a href="#lightbox-viewport-improve" data-toggle="tab">Verbessern</a></li>
-						<li id="lightbox-control-disqus"><a href="#lightbox-viewport-disqus" data-toggle="tab">Kommentieren</a></li>
-						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
-								Teilen
-								<b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="javascript:;" id="share-twitter">Twitter</a></li>
-								<li><a href="javascript:;" id="share-facebook">Facebook</a></li>
-								<li><a href="javascript:;" id="share-google">Google+</a></li>
-							</ul>
-						</li>
-					</ul>
-					<a id="lightbox-close" class="btn btn-danger" title="Schließen" href="javascript:;" onclick="$('#lightbox').fadeOut('fast');location.hash='';"><i class="icon-white icon-remove"></i></a>
-				</div>
-				<div id="lightbox-viewport" class="tab-content">
-					<div class="tab-pane active" id="lightbox-viewport-doc"></div>
-					<div class="tab-pane" id="lightbox-viewport-trans"></div>
-					<div class="tab-pane" id="lightbox-viewport-improve">
-						<h2>Verbessern</h2>
-						<p>
-							Du möchtest mithelfen eine Seite zu transkribieren oder einen Fehler korrigieren? Hier steht ein super-motivierender Erklär-Text, der erläutert, wie das geht.
-						</p>
-						<p>
-							<a class="btn btn-primary btn-large" id="lightbox-viewport-improve-button" href="javascript:;">Transkript bearbeiten</a>
-						</p>
-					</div>
-					<div class="tab-pane" id="lightbox-viewport-disqus">
-						<div id="disqus_thread"></div>
-					</div>
-				</div>
-				<div id="lightbox-navigation">
-					<div id="lightbox-navigation-items"></div>
-				</div>
-			</div>
 		</div>
 	</body>
 </html>
