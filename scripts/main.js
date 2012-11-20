@@ -33,6 +33,15 @@ $(function () {
 		
 	})
 
+	$($updates.comments).each(function(idx,e){
+		$('#sidebar-comments').append($('<div class="sidebar-comment sidebar-subitem"><h3><a href="#!/'+e.link+'">'+e.article+'</a></h3><div class="date">'+e.date+'</div><div class="content"><a href="#!/'+e.link+'">'+e.content+'</a></div></div>'));
+	});
+
+	$($updates.changes).each(function(idx,e){
+		var p = (e.change>=0) ? "+":"";
+		$('#sidebar-changes').append($('<div class="sidebar-change sidebar-subitem"><h3><a href="#!/'+e.link+'">'+e.article+'</a></h3><div class="date">'+e.date+'</div><div class="content"><a href="#!/'+e.link+'">'+p+''+e.change+' Zeichen</a></div></div>'));
+	});
+
 	$('#impressum').hide();
 	
 	$('#link-impressum').popover({
