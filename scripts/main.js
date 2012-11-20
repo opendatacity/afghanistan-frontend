@@ -110,7 +110,11 @@ $(function () {
 		}
 	})())
 		
-	initSearch();
+	if ($('html').hasClass('lt-ie9')) {
+		$('#search').html('');
+	} else {
+		initSearch();
+	}
 	
 });
 
