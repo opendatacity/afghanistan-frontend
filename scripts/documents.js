@@ -48,14 +48,7 @@ function Document(data, index, renderer) {
 	var imageUrl = 'style/thumb'+thumbId+'-transparent.png';
 	var color = qualityToColor(data.qualitySum);
 
-	function startReader(index, data, viewObject) {
-	}
-
 	var viewObject = renderer.drawImage(imageUrl, 'thumb', color, 'Unterrichtung des Parlaments '+data.title_);
-	
-	$(viewObject).click(function(){
-		Lightbox(data.title+"-01");
-	});
 	
 	for (var z = 0; z < data.c; z++) {
 		allPageIds.push(data.title + '-' + (z<10) ? '0'+z : z);
@@ -77,7 +70,7 @@ function Document(data, index, renderer) {
 				thumbs.push('<div onclick="showReader(\''+s+'\')" class="thumb" title="Seite '+(i+1)+'" style="opacity:'+opacity+';left:'+x+'px; top:'+y+'px; background-color:'+color+'; background-image:url(\'style/thumb'+t+'-transparent.png\')"></div>');
 				if (maxY < y) maxY = y;
 			}
-			return '<div style="position:relative; height:'+(maxY+35)+'px">'+thumbs.join('')+'</div>';
+			return '<div style="position:relative; height:' + (maxY+35) + 'px">' + thumbs.join('') + '</div>';
 		},
 		trigger:'focus',
 		placement:'bottom'
