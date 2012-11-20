@@ -170,7 +170,7 @@ var layouts = {
 				this.labels = $('<div style="display:none"></div>');
 				var projection = this.projection();
 				for (var i = 2005; i <= 2012; i++) {
-					var p = projection(0, {w:0, j:i});
+					var p = projection(0, {w:1, j:i});
 					this.labels.append($('<div class="backgroundLabel">'+i+'</div>').css({top:p.y+1, left:20}));
 					if (this.maxY < p.y) this.maxY = p.y+20;
 				}
@@ -184,9 +184,10 @@ var layouts = {
 		labels: false,
 		projection: function () {
 			return function (i, data) {
+				var w = data.w + 12;
 				return {
-					x: (data.w % 13)*41+120,
-					y: (30-(Math.floor(data.w/13) + (data.j - 2005)*4))*50+30
+					x: (w % 13)*41+120,
+					y: (30-(Math.floor(w/13) - 1 + (data.j - 2005)*4))*50+30
 				}
 			}
 		}
