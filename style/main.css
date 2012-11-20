@@ -207,6 +207,12 @@ body {
 						z-index: -100;
 
 					}
+					
+					#canvas .popover-title {
+						
+						display: none;
+						
+					}
 			
 			#sidebar {
 				

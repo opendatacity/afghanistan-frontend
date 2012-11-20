@@ -37,6 +37,11 @@ function Documents(renderer) {
 	return me;
 }
 
+function showReader(pageId) {
+	$('.thumb').popover('hide');
+	Lightbox(pageId);
+}
+
 function Document(data, index, renderer) {
 	var me = this;
 	me.data = data;
@@ -49,10 +54,6 @@ function Document(data, index, renderer) {
 
 	var viewObject = renderer.drawImage(imageUrl, 'thumb', color, 'Unterrichtung des Parlaments '+data.title_);
 	
-	$(viewObject).click(function(){
-		Lightbox(data.title+"-01");
-	});
-	
 	viewObject.popover({
 		html:true,
 		content:function () {
@@ -64,15 +65,26 @@ function Document(data, index, renderer) {
 				var t = data.t.charAt(i);
 				var color = qualityToColor(data.quality[i]);
 				var x = (i % 6)*37;
-				var y = Math.floor(i / 6)*46;
-				thumbs.push('<div class="thumb" style="opacity:'+opacity+';left:'+x+'px; top:'+y+'px; background-color:'+color+'; background-image:url(\'style/thumb'+t+'-transparent.png\')"></div>');
+				var y = Math.floor(i / 6)*46+5;
+				var s = data.title+'-'+(i+101).toFixed().substr(1,2)
+				thumbs.push('<div onclick="showReader(\''+s+'\')" class="thumb" title="Seite '+(i+1)+'" style="opacity:'+opacity+';left:'+x+'px; top:'+y+'px; background-color:'+color+'; background-image:url(\'style/thumb'+t+'-transparent.png\')"></div>');
 				if (maxY < y) maxY = y;
 			}
 			return '<div style="position:relative; height:'+(maxY+35)+'px">'+thumbs.join('')+'</div>';
 		},
-		trigger:'hover',
+		trigger:'focus',
 		placement:'bottom'
 	});
+	
+	viewObject.tooltip({html:true, placement:'right', title:function () {
+		var title = 'Ausgabe '+data.w+'/'+data.j;
+		if (searchActive) {
+			title += '<br>('+data.pageResultCount+' Seite'+(data.pageResultCount != 1 ? 'n' : '')+' mit Treffern)';
+		} else {
+			title += '<br>('+data.c+' Seiten)';
+		}
+		return title;
+	}});
 	
 	me.newPosition = function (f, duration, delay) {
 		var pos = f(index, data);
@@ -114,9 +126,7 @@ function Renderer(target) {
 	var me = this;
 	
 	me.drawImage = function (url, className, backgroundColor, title) {
-		var div = $('<div class="'+className+'" title="'+title+'" style="background-color:'+backgroundColor+';background-image:url(\''+url+'\')" ></div>');
-		//var img = $('<img src="'+url+'"/>');
-		//div.append(img);
+		var div = $('<div class="'+className+'" style="background-color:'+backgroundColor+';background-image:url(\''+url+'\')" tabindex="0"></div>');
 		target.append(div);
 		return div;
 	}
@@ -214,6 +224,7 @@ function LightboxPage(issue,page) {
 	var conf = $('#lightbox').data();
 	
 	$('#lightbox-header').html('<h2>'+conf.week+'/'+conf.year+'</h2><h3>Seite '+page+'/'+conf.pages+'</h3>');
+	$('#lightbox-viewport-doc').html('<img src="data/images/'+issue+'-'+page+'.png" />');
 
 	$('#lightbox-viewport-doc').html('<img src="data/images/'+issue+'-'+page+'.png" />');
 	
