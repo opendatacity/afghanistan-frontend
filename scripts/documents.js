@@ -172,7 +172,7 @@ function Lightbox(h) {
 		
 		var $lbel;
 		
-		for (var i=1; i<data.c; i++) {
+		for (var i=1; i <= data.c; i++) {
 			
 			d = (i<10)?'0'+i:i;
 			
@@ -192,7 +192,7 @@ function Lightbox(h) {
 
 		}
 
-		$lbnav.css({width: ((data.c*40)+40)});
+		$lbnav.css({width: (data.c*40 + 60)});
 				
 	}
 	
@@ -241,7 +241,7 @@ function LightboxPage(issue,page) {
 
  	disqus_identifier = currentDoc;
  	disqus_url = location.href;
-	disqus_title = "Die Afghanistan Papiere "+conf.week+'/'+conf.year+' Seite '+page
+	disqus_title = "Die Afghanistan Papiere "+conf.week+'/'+conf.year+' Seite '+page;
 	
 	DISQUS.reset({
 		reload: true,
