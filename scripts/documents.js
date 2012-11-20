@@ -187,7 +187,7 @@ function Lightbox(h) {
 				title: "Seite "+i,
 				placement: "top"
 			});
-			$lbel.append('<img src="/data/images/thumb/'+issue+'-'+d+'.png/90px-'+issue+'-'+d+'.png" />');
+			$lbel.append('<img src="data/images/thumb/'+issue+'-'+d+'.png/90px-'+issue+'-'+d+'.png" />');
 			$lbnav.append($lbel);
 
 		}
@@ -214,14 +214,13 @@ function LightboxPage(issue,page) {
 	var conf = $('#lightbox').data();
 	
 	$('#lightbox-header').html('<h2>'+conf.week+'/'+conf.year+'</h2><h3>Seite '+page+'/'+conf.pages+'</h3>');
-	$('#lightbox-viewport-doc').html('<img src="/data/images/'+issue+'-'+page+'.png" />');
 
-	$('#lightbox-viewport-doc').html('<img src="/data/images/'+issue+'-'+page+'.png" />');
+	$('#lightbox-viewport-doc').html('<img src="data/images/'+issue+'-'+page+'.png" />');
 	
 	$('#lightbox-viewport-trans').addClass('loading');
 	
 	$.ajax({
-		url: '/data/t/'+issue+'-'+page+'.json',
+		url: 'data/t/'+issue+'-'+page+'.json',
 		method: 'GET',
 		contentType: 'json',
 		success: function(data) {
