@@ -242,8 +242,8 @@ function LightboxPage(issue,page) {
 
 	$('#lightbox-viewport-improve-button').attr('href','http://wiki.derwesten-recherche.org/index.php?title='+issue+'-'+page+'&action=edit');
 	
-	$('#share-twitter').attr('href','https://twitter.com/intent/tweet?url=http%3A%2F%2Fafghanistan.derwesten-recherche.de%2F%23%21%2F'+issue+'-'+page+'&text=Die+Afghansistan+Papiere%2C+Ausgabe+'+conf.week+'%2F'+conf.year+'+Seite+'+page+'+%23afghanistan+%23leak&via=wazrechereche&related=wazrechereche');
-	$('#share-facebook').attr('href','http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fafghanistan.derwesten-recherche.de%2F%23%21%2F'+issue+'-'+page+'&t=Die+Afghansistan+Papiere%2C+Ausgabe+'+conf.week+'%2F'+conf.year+'+Seite+'+page);
+	$('#share-twitter').attr('href','https://twitter.com/intent/tweet?url=http%3A%2F%2Fafghanistan.derwesten-recherche.de%2F%23%21%2F'+issue+'-'+page+'&text=Die+Afghanistan+Papiere%2C+Ausgabe+'+conf.week+'%2F'+conf.year+'+Seite+'+page+'+%23afghanistan+%23leak&via=wazrechereche&related=wazrechereche');
+	$('#share-facebook').attr('href','http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fafghanistan.derwesten-recherche.de%2F%23%21%2F'+issue+'-'+page+'&t=Die+Afghanistan+Papiere%2C+Ausgabe+'+conf.week+'%2F'+conf.year+'+Seite+'+page);
 	$('#share-google').attr('href','https://plus.google.com/share?url=http%3A%2F%2Fafghanistan.derwesten-recherche.de%2F%23%21%2F'+issue+'-'+page);
 
  	disqus_identifier = currentDoc;
