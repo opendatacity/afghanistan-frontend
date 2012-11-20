@@ -4,7 +4,8 @@ var
 	wordDocuments = {},
 	pageCount = 0,
 	date2Document = [],
-	$word_articles = {};
+	$word_articles = {},
+	searchActive = false;
 
 function initSearch() {
 	var jqxhr = $.ajax('data/word_articles.json', {dataType:'json'}).done(function(data) {
@@ -99,18 +100,26 @@ function search() {
 	for (var i = 0; i < $documents.length; i++) {
 		var sum = 0;
 		var pageIds = $documents[i].pageIds;
+		var pageCount = 0;
 		for (var j = 0; j < pageIds.length; j++) {
-			sum += $pages[pageIds[j]].resultCount
+			var count = $pages[pageIds[j]].resultCount;
+			if (count > 0) {
+				sum += count;
+				pageCount++;
+			}
 		}
 		$documents[i].resultCount = sum / $documents[i].c;
+		$documents[i].pageResultCount = pageCount;
 	}
-		
+	
+	searchActive = true;
 	documents.updateResultMarkers(true);
 }
 
 function searchReset() {
 	for (var i = 0; i < $documents.length; i++) $documents[i].resultCount = 1;
 	for (var i = 0; i <     $pages.length; i++)     $pages[i].resultCount = 1;
+	searchActive = false;
 	documents.updateResultMarkers(false);
 }
 
