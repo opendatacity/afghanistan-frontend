@@ -1,4 +1,4 @@
-
+var allPageIds = [];
 
 function Documents(renderer) {
 	var me = this;
@@ -37,7 +37,9 @@ function Documents(renderer) {
 	return me;
 }
 
-var documentsReverse = [];
+function showReader(pageId) {
+	Lightbox(pageId);
+}
 
 function Document(data, index, renderer) {
 	var me = this;
@@ -46,18 +48,10 @@ function Document(data, index, renderer) {
 	var imageUrl = 'style/thumb'+thumbId+'-transparent.png';
 	var color = qualityToColor(data.qualitySum);
 
-	function startReader(index, data, viewObject) {
-	}
-
 	var viewObject = renderer.drawImage(imageUrl, 'thumb', color, 'Unterrichtung des Parlaments '+data.title_);
 	
-	$(viewObject).click(function(){
-		Lightbox(data.title+"-01");
-	});
-	
-	for (var z=0;z<data.c;z++) {
-		z=(z<10)?'0'+z:z;
-		documentsReverse.push(data.title+"-"+z);
+	for (var z = 0; z < data.c; z++) {
+		allPageIds.push(data.title + '-' + (z<10) ? '0'+z : z);
 	}
 	
 	viewObject.popover({
@@ -71,15 +65,26 @@ function Document(data, index, renderer) {
 				var t = data.t.charAt(i);
 				var color = qualityToColor(data.quality[i]);
 				var x = (i % 6)*37;
-				var y = Math.floor(i / 6)*46;
-				thumbs.push('<div class="thumb" style="opacity:'+opacity+';left:'+x+'px; top:'+y+'px; background-color:'+color+'; background-image:url(\'style/thumb'+t+'-transparent.png\')"></div>');
+				var y = Math.floor(i / 6)*46+5;
+				var s = data.title+'-'+(i+101).toFixed().substr(1,2)
+				thumbs.push('<div onclick="showReader(\''+s+'\')" class="thumb" title="Seite '+(i+1)+'" style="opacity:'+opacity+';left:'+x+'px; top:'+y+'px; background-color:'+color+'; background-image:url(\'style/thumb'+t+'-transparent.png\')"></div>');
 				if (maxY < y) maxY = y;
 			}
-			return '<div style="position:relative; height:'+(maxY+35)+'px">'+thumbs.join('')+'</div>';
+			return '<div style="position:relative; height:' + (maxY+35) + 'px">' + thumbs.join('') + '</div>';
 		},
-		trigger:'hover',
+		trigger:'focus',
 		placement:'bottom'
 	});
+	
+	viewObject.tooltip({html:true, placement:'right', title:function () {
+		var title = 'Ausgabe '+data.w+'/'+data.j;
+		if (searchActive) {
+			title += '<br>('+data.pageResultCount+' Seite'+(data.pageResultCount != 1 ? 'n' : '')+' mit Treffern)';
+		} else {
+			title += '<br>('+data.c+' Seiten)';
+		}
+		return title;
+	}});
 	
 	me.newPosition = function (f, duration, delay) {
 		var pos = f(index, data);
@@ -121,9 +126,7 @@ function Renderer(target) {
 	var me = this;
 	
 	me.drawImage = function (url, className, backgroundColor, title) {
-		var div = $('<div class="'+className+'" title="'+title+'" style="background-color:'+backgroundColor+';background-image:url(\''+url+'\')" ></div>');
-		//var img = $('<img src="'+url+'"/>');
-		//div.append(img);
+		var div = $('<div class="'+className+'" style="background-color:'+backgroundColor+';background-image:url(\''+url+'\')" tabindex="0"></div>');
 		target.append(div);
 		return div;
 	}
@@ -194,7 +197,7 @@ function Lightbox(h) {
 				title: "Seite "+i,
 				placement: "top"
 			});
-			$lbel.append('<img src="/data/images/thumb/'+issue+'-'+d+'.png/90px-'+issue+'-'+d+'.png" />');
+			$lbel.append('<img src="data/images/thumb/'+issue+'-'+d+'.png/90px-'+issue+'-'+d+'.png" />');
 			$lbnav.append($lbel);
 
 		}
@@ -223,12 +226,12 @@ function LightboxPage(issue,page) {
 	$('#lightbox-headline').html('<h2>'+conf.week+'/'+conf.year+' <small>Seite '+parseInt(page,10)+'/'+conf.pages+'</small></h2>');
 	$('#lightbox-viewport-doc').html('<img src="/data/images/'+issue+'-'+page+'.png" />');
 
-	$('#lightbox-viewport-doc').html('<img src="/data/images/'+issue+'-'+page+'.png" />');
+	$('#lightbox-viewport-doc').html('<img src="data/images/'+issue+'-'+page+'.png" />');
 	
 	$('#lightbox-viewport-trans').addClass('loading');
 	
 	$.ajax({
-		url: '/data/t/'+issue+'-'+page+'.json',
+		url: 'data/t/'+issue+'-'+page+'.json',
 		method: 'GET',
 		contentType: 'json',
 		success: function(data) {
@@ -277,5 +280,5 @@ function hashCheck() {
 }
 
 function randomDoc() {
-	return documentsReverse[(parseInt(Math.random()*10000000)%documentsReverse.length)];
+	return allPageIds[(Math.floor(Math.random()*10000000) % allPageIds.length)];
 }

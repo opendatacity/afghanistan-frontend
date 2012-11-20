@@ -183,6 +183,7 @@ body {
 						position: absolute;
 						border: 1px solid #000;
 						background-repeat: no-repeat;
+						cursor: pointer;
 
 					}
 
@@ -205,6 +206,12 @@ body {
 						padding-top: 10px;
 						z-index: -100;
 
+					}
+					
+					#canvas .popover-title {
+						
+						display: none;
+						
 					}
 			
 			#sidebar {
