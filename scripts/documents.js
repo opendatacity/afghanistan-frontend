@@ -37,6 +37,8 @@ function Documents(renderer) {
 	return me;
 }
 
+var documentsReverse = [];
+
 function Document(data, index, renderer) {
 	var me = this;
 	me.data = data;
@@ -52,6 +54,11 @@ function Document(data, index, renderer) {
 	$(viewObject).click(function(){
 		Lightbox(data.title+"-01");
 	});
+	
+	for (var z=0;z<data.c;z++) {
+		z=(z<10)?'0'+z:z;
+		documentsReverse.push(data.title+"-"+z);
+	}
 	
 	viewObject.popover({
 		html:true,
@@ -265,4 +272,8 @@ function hashCheck() {
 		
 	}
 	
+}
+
+function randomDoc() {
+	return documentsReverse[(parseInt(Math.random()*10000000)%documentsReverse.length)];
 }
