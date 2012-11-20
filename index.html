@@ -91,8 +91,13 @@
 			</div>
 		</div>
 		<div id="lightbox">
-			<div id="lightbox-header"></div>
 			<div id="lightbox-content">
+				<div id="lightbox-header">
+					<div id="lightbox-headline"></div>
+					<a href="javascript:;" class="btn btn-inverse" id="lightbox-header-prev" title="Vorherige Ausgabe"><i class="icon-white icon-arrow-left"></i></a>
+					<a href="javascript:;" class="btn btn-inverse" id="lightbox-header-next" title="Nächse Ausgabe"><i class="icon-white icon-arrow-right"></i></a>
+					<a href="javascript:;" class="btn btn-danger" id="lightbox-close" title="Schließen" onclick="$('#lightbox').fadeOut('fast');location.hash='';"><i class="icon-white icon-remove"></i></a>
+				</div>
 				<div id="lightbox-controls">
 					<ul class="nav nav-tabs">
 						<li id="lightbox-control-doc" class="active"><a href="#lightbox-viewport-doc" data-toggle="tab">Original-Dokument</a></li>
@@ -136,7 +141,6 @@
 							</ul>
 						</li>
 					</ul>
-					<a id="lightbox-close" class="btn btn-danger" title="Schließen" href="javascript:;" onclick="$('#lightbox').fadeOut('fast');location.hash='';"><i class="icon-white icon-remove"></i></a>
 				</div>
 				<div id="lightbox-viewport" class="tab-content">
 					<div class="tab-pane active" id="lightbox-viewport-doc"></div>

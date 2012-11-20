@@ -63,6 +63,28 @@ $(function () {
 		e.preventDefault();
 	});
 	
+	$('#lightbox-header-prev').click(function(){
+		var d=$('#lightbox').data();
+		var i=documentsIndex[d.issue];
+		if (i === 0) {
+			i = ($documents.length-1);
+		} else {
+			i--;
+		}
+		location.hash='!/'+$documents[i].title+'-01';
+	});
+	
+	$('#lightbox-header-next').click(function(){
+		var d=$('#lightbox').data();
+		var i=documentsIndex[d.issue];
+		if (i === ($documents.length-1)) {
+			i = 0;
+		} else {
+			i++;
+		}
+		location.hash='!/'+$documents[i].title+'-01';
+	});
+	
 	$('#share-twitter').click(function(){
 		window.open($(this).attr('href'), "share", "width=500,height=300,status=no,scrollbars=no,resizable=no,menubar=no,toolbar=no");	
 	});

@@ -460,12 +460,6 @@ body {
 		
 	}
 	
-		#lightbox-header {
-			
-			display: none;
-			
-		}
-		
 		#lightbox-content {
 			
 			display: block;
@@ -484,12 +478,86 @@ body {
 			
 		}
 		
+		#lightbox-header {
+			
+			display: block;
+			position: absolute;
+			left: 5px;
+			top: 5px;
+			right: 5px;
+			height: 30px;
+			
+		}
+		
+			#lightbox-header #lightbox-headline {
+				
+				display: block;
+				position: absolute;
+				left: 140px;
+				height: 35px;
+				overflow: hidden;
+				top: 0px;
+				
+			}
+			
+				#lightbox-header #lightbox-headline h2 {
+					
+					margin: 0px;
+					padding: 0px;
+					line-height: 35px;
+					font-size: 24px;
+					
+				}
+
+			#lightbox-header #lightbox-header-prev {
+
+				display: block;
+				position: absolute;
+				left: 0px;
+				top: 2px;
+
+			}
+		
+			#lightbox-header #lightbox-header-next {
+
+				display: block;
+				position: absolute;
+				left: 48px;
+				top: 2px;
+
+			}
+		
+			#lightbox-header #lightbox-close {
+
+				display: block;
+				position: absolute;
+				right: 0px;
+				top: 2px;
+
+			}
+		
+		#lightbox-controls {
+			
+			display: block;
+			position: absolute;
+			left: 5px;
+			top: 45px;
+			right: 5px;
+			
+		}
+		
+			#lightbox-controls ul {
+				
+				margin-bottom: 0px;
+				
+			}
+		
 		#lightbox-viewport {
 			
 			display: block;
 			position: absolute;
 			left: 5px;
-			top: 43px;
+			top: 83px;
 			right: 5px;
 			bottom: 65px;
 			border: 1px solid #ddd;
@@ -535,15 +603,6 @@ body {
 					padding: 50px;
 					
 				}
-		
-		#lightbox-close {
-			
-			display: block;
-			position: absolute;
-			right: 6px;
-			top: 6px;
-			
-		}
 		
 		#lightbox-navigation {
 			

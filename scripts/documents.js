@@ -164,7 +164,7 @@ function Lightbox(h) {
 	
 	if ($lb.data('issue') !== issue) {
 	
-		$lb.fadeOut('fast');
+		// $lb.fadeOut('fast');
 		$lb.data({
 			year: data.j,
 			week: data.w,
@@ -220,7 +220,7 @@ function LightboxPage(issue,page) {
 
 	var conf = $('#lightbox').data();
 	
-	$('#lightbox-header').html('<h2>'+conf.week+'/'+conf.year+'</h2><h3>Seite '+page+'/'+conf.pages+'</h3>');
+	$('#lightbox-headline').html('<h2>'+conf.week+'/'+conf.year+' <small>Seite '+parseInt(page,10)+'/'+conf.pages+'</small></h2>');
 	$('#lightbox-viewport-doc').html('<img src="/data/images/'+issue+'-'+page+'.png" />');
 
 	$('#lightbox-viewport-doc').html('<img src="/data/images/'+issue+'-'+page+'.png" />');
