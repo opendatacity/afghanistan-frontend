@@ -51,7 +51,7 @@ function Document(data, index, renderer) {
 	var viewObject = renderer.drawImage(imageUrl, 'thumb', color, 'Unterrichtung des Parlaments '+data.title_);
 	
 	for (var z = 0; z < data.c; z++) {
-		allPageIds.push(data.title + '-' + (z<10) ? '0'+z : z);
+		allPageIds.push(data.title + '-' + ((z<10) ? '0'+z : z));
 	}
 	
 	viewObject.popover({
@@ -301,7 +301,7 @@ function hashCheck() {
 				$('#faq-container').fadeIn('fast');
 			break;
 			default:
-				loaction.hash='!/';
+				location.hash='!/';
 			break;
 		}
 		
