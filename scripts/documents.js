@@ -195,7 +195,7 @@ function Lightbox(h) {
 			
 			d = (i<10) ? '0'+i : i;
 			
-			var opacity = ($pages[data.pageIds[i-1]].resultCount < 1) ? 0.6 : 1;
+			var opacity = ($pages[data.pageIds[i-1]].resultCount < 1) ? 0.5 : 1;
 			var color = qualityToColor(data.quality[i-1]);
 			
 			$lbel = $('<a href="javascript:;" class="lightbox-item" id="lightbox-item-'+issue+'-'+d+'" style="background-color:'+color+'; border-color:'+color+'; color:'+color+'; opacity:'+opacity+'"></a>');
