@@ -232,7 +232,7 @@ function LightboxPage(issue, page) {
 		currentDoc = issue+'-'+page;
 		location.hash = '!/'+issue+'-'+page;
 	}
-
+	
 	$('#lightbox-improve').remove();
 	if ($('#lightbox-item-'+currentDoc).data('quality') < 1) {
 		$('#lightbox-content').append($('<div id="lightbox-improve" class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button><strong>Hilf mit!</strong> Dieses Dokument muss kontrolliert werden. <a class="btn btn-primary btn-mini" style="margin-left:50px" href="http://wiki.derwesten-recherche.org/wiki/'+currentDoc+'">Transkript bearbeiten</a></div>'));
@@ -265,16 +265,18 @@ function LightboxPage(issue, page) {
 	$('#share-facebook').attr('href','http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fafghanistan.derwesten-recherche.de%2F%23%21%2F'+issue+'-'+page+'&t=Die+Afghanistan+Papiere%2C+Ausgabe+'+conf.week+'%2F'+conf.year+'+Seite+'+page);
 	$('#share-google').attr('href','https://plus.google.com/share?url=http%3A%2F%2Fafghanistan.derwesten-recherche.de%2F%23%21%2F'+issue+'-'+page);
 
- 	disqus_identifier = issue;
- 	disqus_url = location.href;
-	disqus_title = "Die Afghanistan Papiere "+conf.week+'/'+conf.year;//+' Seite '+page;
 	
-	if (typeof DISQUS !== "undefined") {	
+	if (typeof DISQUS !== "undefined" && disqus_identifier !== issue) {	
+
+	 	disqus_identifier = issue;
+	 	disqus_url = location.href;
+		disqus_title = "Die Afghanistan Papiere "+conf.week+'/'+conf.year;
+
 		DISQUS.reset({
 			reload: true,
 			config: function () {  
 				this.page.identifier = disqus_identifier;  
-				this.page.url = '!/'+issue+'-01';
+				this.page.url = location.href.replace(/-[0-9]{2}$/,'-01');
 				this.page.title = disqus_title;
 			}
 		});
