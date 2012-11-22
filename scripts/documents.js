@@ -198,7 +198,7 @@ function Lightbox(h) {
 			var color = qualityToColor(data.quality[i-1]);
 			
 			$lbel = $('<a href="javascript:;" class="lightbox-item" id="lightbox-item-'+issue+'-'+d+'" style="background-color:'+color+'; border-color:'+color+'; color:'+color+'; opacity:'+opacity+'"></a>');
-			$lbel.data({ issue:issue, page:d });
+			$lbel.data({ issue:issue, page:d, quality: data.quality[i-1] });
 			$lbel.click(function(){
 				$(this).blur();
 				location.hash='!/'+$(this).data('issue')+'-'+$(this).data('page');
@@ -233,6 +233,11 @@ function LightboxPage(issue, page) {
 		location.hash = '!/'+issue+'-'+page;
 	}
 
+	$('#lightbox-improve').remove();
+	if ($('#lightbox-item-'+currentDoc).data('quality') < 1) {
+		$('#lightbox-content').append($('<div id="lightbox-improve" class="alert alert-error"><button type="button" class="close" data-dismiss="alert">×</button><strong>Hilf mit!</strong> Dieses Dokument muss kontrolliert werden. <a class="btn btn-primary btn-mini" style="margin-left:50px" href="http://wiki.derwesten-recherche.org/wiki/'+currentDoc+'">Transkript bearbeiten</a></div>'));
+	} 
+	
 	var conf = $('#lightbox').data();
 	
 	$('#lightbox-headline').html('<h2>'+conf.week+'/'+conf.year+' <small>Seite '+parseInt(page,10)+'/'+conf.pages+'</small></h2>');
