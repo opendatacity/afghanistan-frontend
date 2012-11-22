@@ -245,7 +245,7 @@ function LightboxPage(issue, page) {
 	$.ajax({
 		url: 'data/t/'+issue+'-'+page+'.json',
 		method: 'GET',
-		contentType: 'json',
+		dataType: 'json',
 		success: function(data) {
 			$('#lightbox-viewport-trans').html('<p>'+data.content+'</p>');
 			$('#lightbox-viewport-trans').removeClass('loading');
