@@ -261,7 +261,7 @@ function LightboxPage(issue, page) {
 	$('#share-facebook').attr('href','http://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fafghanistan.derwesten-recherche.de%2F%23%21%2F'+issue+'-'+page+'&t=Die+Afghanistan+Papiere%2C+Ausgabe+'+conf.week+'%2F'+conf.year+'+Seite+'+page);
 	$('#share-google').attr('href','https://plus.google.com/share?url=http%3A%2F%2Fafghanistan.derwesten-recherche.de%2F%23%21%2F'+issue+'-'+page);
 
- 	disqus_identifier = currentDoc;
+ 	disqus_identifier = issue;
  	disqus_url = location.href;
 	disqus_title = "Die Afghanistan Papiere "+conf.week+'/'+conf.year+' Seite '+page;
 	
