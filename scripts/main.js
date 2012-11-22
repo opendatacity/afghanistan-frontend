@@ -16,22 +16,26 @@ $(function () {
 	/*$('#layoutButtons').append($('<button class="btn">Kartenansicht</button>'));*/
 	$('#layoutButtons').append($('<button class="btn">Noch mehr Funktionen demnächst!</button>'));
 	
-	$('#intro-button').click(function(){
+	/* intro */
+	
+	$('#nav-intro').click(function(){
+		intro_toggle();
+	});
+
+	$('#intro-close').click(function(){
+		intro_toggle();
+	});
+
+	if ($.cookie('show-intro') === 'false') {
+		$('#intro').hide();
+	} else {
+		$('#nav-intro').parent().addClass('active');
+	}
+
+	$('#intro-more').click(function(){
 		$('#intro-controls').remove();
 		$('#intro-more').fadeIn('fast');
 	});
-	
-	$('#nav-intro').click(function(){
-		
-		if ($('#intro:hidden').length === 0) {
-			$('#nav-intro').parent().removeClass('active');
-			$('#intro').fadeOut('fast');
-		} else {
-			$('#intro').fadeIn('fast');
-			$('#nav-intro').parent().addClass('active');
-		}
-		
-	})
 
 	$($updates.comments).each(function(idx,e){
 		$('#sidebar-comments').append($('<div class="sidebar-comment sidebar-subitem"><h3><a href="#!/'+e.link+'">'+e.article+'</a></h3><div class="date">'+e.date+'</div><div class="content"><a href="#!/'+e.link+'">'+e.content+'</a></div></div>'));
@@ -236,5 +240,17 @@ var layouts = {
 		}
 	}
 };
+
+function intro_toggle() {
+	if ($('#intro:hidden').length === 0) {
+		$('#intro').fadeOut('fast');
+		$('#nav-intro').parent().removeClass('active');
+		$.cookie('show-intro','false', {expires:7,path:'/'});
+	} else {
+		$('#intro').fadeIn('fast');
+		$('#nav-intro').parent().addClass('active');
+		$.cookie('show-intro','true', {expires:7,path:'/'});
+	}
+}
 
 
