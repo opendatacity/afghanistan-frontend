@@ -15,8 +15,6 @@ $(function () {
 	}));
 	/*$('#layoutButtons').append($('<button class="btn">Noch mehr Funktionen demnächst!</button>'));*/
 	
-	/* intro */
-	
 	$('#nav-intro').click(function(){
 		intro_toggle();
 	});
@@ -31,7 +29,7 @@ $(function () {
 		$('#nav-intro').parent().addClass('active');
 	}
 
-	$('#intro-more').click(function(){
+	$('#intro-more-button').click(function(){
 		$('#intro-controls').remove();
 		$('#intro-more').fadeIn('fast');
 	});
