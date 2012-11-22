@@ -59,9 +59,17 @@ $(function () {
 	$('#link-impressum').popover({
 		html: true,
 		content: $('#impressum').html(),
-		placement: 'top'
+		placement: 'top',
+		trigger: 'click',
+	}).click(function(e){
+		e.preventDefault();
+		if (location.hash==='#!/impressum') {
+			location.hash="!/";
+		} else {
+			location.hash='!/impressum'
+		}
 	});
-	
+
 	$('#lightbox-controls a').click(function(e){
 		$(this).blur();
 		e.preventDefault();

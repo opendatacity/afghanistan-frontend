@@ -287,6 +287,24 @@ function hashCheck() {
 		
 		Lightbox(location.hash.substr(3));
 		
+	} else if (location.hash) {
+		
+		switch(location.hash.substr(3)) {
+			case "impressum":
+				$('#link-impressum').popover('show');
+				$("html,body").animate({ scrollTop: $(document).height() }, "slow");
+			break;
+			case "download":
+				$('#download-container').fadeIn('fast');
+			break;
+			case "faq":
+				$('#faq-container').fadeIn('fast');
+			break;
+			default:
+				loaction.hash='!/';
+			break;
+		}
+		
 	}
 	
 }
