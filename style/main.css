@@ -45,6 +45,12 @@ body {
 				
 			}
 			
+				#logo:hover {
+					
+					cursor:pointer;
+					
+				}
+			
 				#logo h1 {
 					
 					display: none;

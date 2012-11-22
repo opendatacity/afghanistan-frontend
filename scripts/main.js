@@ -159,6 +159,10 @@ $(function () {
 			resizeStarted = true;
 		}
 	})())
+	
+	$('#logo').click(function(){
+		window.location.reload(true);
+	});
 		
 	if ($('html').hasClass('lt-ie9')) {
 		$('#search').html('');
