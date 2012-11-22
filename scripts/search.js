@@ -51,6 +51,8 @@ function search() {
 		return;
 	}
 	
+	$('#searchReset').removeAttr('disabled');
+	
 	// Welche gültigen Suchbegriffe werden verwendet
 	var temp = query.toLowerCase().split(' ');
 	query = [];
@@ -117,6 +119,7 @@ function search() {
 }
 
 function searchReset() {
+	$('#searchReset').attr('disabled', 'disabled');
 	for (var i = 0; i < $documents.length; i++) $documents[i].resultCount = 1;
 	for (var i = 0; i <     $pages.length; i++)     $pages[i].resultCount = 1;
 	searchActive = false;

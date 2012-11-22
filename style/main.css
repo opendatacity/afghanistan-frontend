@@ -150,8 +150,13 @@ body {
 	
 				display: block;
 				float: right;
+				width: 201px;
 	
 			}
+			
+				#searchReset[disabled=disabled] {
+					opacity: 0.5;
+				}
 			
 		#main {
 			
