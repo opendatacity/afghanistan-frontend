@@ -226,6 +226,40 @@ body {
 					border-bottom: 1px solid #eee;
 					
 				}
+
+				#sidebar .sidebar-item-content {
+					
+					display: block;
+					position: relative;
+					margin: 0px 0px 5px;
+					padding: 10px;
+					background-color: #fcfcfc;
+					border: 1px solid #ccc;
+					-webkit-border-radius: 4px;
+					-moz-border-radius: 4px;
+					border-radius: 4px;
+					
+				}
+				
+					#social-twitter {
+						
+						height: 20px;
+						
+					}
+				
+					#social-facebook {
+						
+						margin-top: 5px;
+						height: 20px;
+						
+					}
+				
+					#social-google {
+						
+						margin-top: 5px;
+						height: 24px;
+						
+					}
 				
 				#sidebar .sidebar-subitem {
 					
