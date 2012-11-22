@@ -7,8 +7,8 @@ var disqus_shortname, disqus_identifier, disqus_url, disqus_title;
 $(function () {
 	initData();
 	
-	$('#layoutButtons').append($('<button class="btn active">Quartalsweise</button>').click(function () {
-		setLayout(layouts.quarterly, layoutingDuration);
+	$('#layoutButtons').append($('<button class="btn active">Nach Zeit</button>').click(function () {
+		setLayout(layouts.time, layoutingDuration);
 	}));
 	$('#layoutButtons').append($('<button class="btn">Nach Qualität</button>').click(function () {
 		setLayout(layouts.quality, layoutingDuration);
@@ -129,7 +129,7 @@ $(function () {
 	canvas = $('#canvas');
 	renderer = new Renderer(canvas);
 	documents = new Documents(renderer);
-	setLayout(layouts.quarterly, 0);
+	setLayout(layouts.time, 0);
 
 	hashCheck();
 	
@@ -216,16 +216,19 @@ var layouts = {
 		},
 		lookup: []
 	},
-	quarterly: {
+	time: {
 		maxY: 0,
 		show: function (duration) {
 			if (!this.labels) {
 				this.maxY = 0;
 				this.labels = $('<div style="display:none"></div>');
+				this.labelList = [];
 				var projection = this.projection();
 				for (var i = 2005; i <= 2012; i++) {
 					var p = projection(0, {w:1, j:i});
-					this.labels.append($('<div class="backgroundLabel">'+i+'</div>').css({top:p.y+1, left:20}));
+					var label = $('<div class="backgroundLabel">'+i+'</div>').css({top:p.y+1, left:p.x-90, width:635});
+					this.labelList.push({label:label, jahr:i});
+					this.labels.append(label);
 					if (this.maxY < p.y) this.maxY = p.y+20;
 				}
 				canvas.append(this.labels);
@@ -235,15 +238,33 @@ var layouts = {
 		hide: function (duration) {
 			if (this.labels) this.labels.fadeOut(duration);
 		},
+		labelList: [],
 		labels: false,
 		projection: function () {
-			return function (i, data) {
-				var w = data.w + 12;
-				return {
-					x: (w % 13)*41+120,
-					y: (30-(Math.floor(w/13) - 1 + (data.j - 2005)*4))*50+30
-				}
+			var width = $('#canvas').innerWidth();
+			var nx = 13;
+			var ny = 4;
+			var labelWidth = 635;
+			if (width < 660) {
+				nx = 9;
+				ny = 6;
+				labelWidth = 471;
 			}
+			var x0 = (width - (120+41*nx))/2;
+			var me = this;
+			me.maxY = 0;
+			var f = function (i, data) {
+				var w = data.w + (nx - 1);
+				var x = (w % nx)*41+90 + x0;
+				var y = ((- Math.floor(w/nx) - 1 + (2013 - data.j)*ny))*50+30;
+				if (me.maxY < y) me.maxY = y;
+				return {x:x, y:y};
+			}
+			for (var i = 0; i < this.labelList.length; i++) {
+				var p = f(0, {w:1, j:this.labelList[i].jahr});
+				this.labelList[i].label.animate({top:p.y+1, left:x0, width:labelWidth}, layoutingDuration);
+			}
+			return f;
 		}
 	}
 };
