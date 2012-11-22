@@ -614,7 +614,7 @@ body {
 			padding: 10px;
 			z-index: 300;
 			border-top: 1px solid #ddd;
-			background-color: #444;
+			background-color: #f9f9f9;
 			-webkit-border-bottom-right-radius: 4px;
 			-webkit-border-bottom-left-radius: 4px;
 			-moz-border-radius-bottomright: 4px;
@@ -644,10 +644,11 @@ body {
 				height: 40px;
 				margin: 0px 5px;
 				top: 0px;
-				border: 1px solid #ccc;
+				border: 1px solid #999 !important;
 				transition: all 0.4s ease-in-out;
 				box-shadow: 0px 0px 20px -10px;
 				color: rgba(0,0,0,0.5);
+				/* background-color: #fff !important; */
 				
 			}
 
@@ -656,14 +657,28 @@ body {
 					height: 40px;
 					top: 0px;
 					left: 0px;
-					opacity: 0.8;
+					/* opacity: 0.8; */
 					position: absolute;
 					cursor: pointer;
+					box-shadow: 0px 0px 5px 0px;
+					
 				}
 			
 				#lightbox-navigation a.active {
-					box-shadow: 0px 0px 9px 2px;
 					color:  #000000;
+					top: -5px;
+				}
+				
+				#lightbox-navigation a.active::after {
+					display: block;
+					position: absolute;
+					left: 10px;
+					bottom: 0px;
+					width: 10px;
+					height: 5px;
+					content: "";
+					background: url(marker.png) top left no-repeat;
+					
 				}
 
 				#lightbox-navigation a:hover {
