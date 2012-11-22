@@ -263,14 +263,14 @@ function LightboxPage(issue, page) {
 
  	disqus_identifier = issue;
  	disqus_url = location.href;
-	disqus_title = "Die Afghanistan Papiere "+conf.week+'/'+conf.year+' Seite '+page;
+	disqus_title = "Die Afghanistan Papiere "+conf.week+'/'+conf.year;//+' Seite '+page;
 	
 	if (typeof DISQUS !== "undefined") {	
 		DISQUS.reset({
 			reload: true,
 			config: function () {  
 				this.page.identifier = disqus_identifier;  
-				this.page.url = location.href;
+				this.page.url = '!/'+issue+'-01';
 				this.page.title = disqus_title;
 			}
 		});
