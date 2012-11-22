@@ -176,7 +176,6 @@ function Lightbox(h) {
 	
 	if ($lb.data('issue') !== issue) {
 	
-		// $lb.fadeOut('fast');
 		$lb.data({
 			year: data.j,
 			week: data.w,
