@@ -16,8 +16,8 @@ function Documents(renderer) {
 		for (var i = 0; i < documents.length; i++) {
 			documents[i].newPosition(f, duration, delayFactor*(documents.length-i));
 		}
-		$('#canvas').animate({height:layout.maxY+50}, duration);
-		$('#main').animate({height:layout.maxY+100}, duration);
+		$('#canvas').animate({height:layout.maxY+ 50}, duration);
+		$('#main'  ).animate({height:layout.maxY+100}, duration);
 	}
 	
 	me.updateResultMarkers = function (showResult) {
@@ -48,7 +48,7 @@ function Document(data, index, renderer) {
 	var imageUrl = 'style/thumb'+thumbId+'-transparent.png';
 	var color = qualityToColor(data.qualitySum);
 
-	var viewObject = renderer.drawImage(imageUrl, 'thumb', color, 'Unterrichtung des Parlaments '+data.title_);
+	var viewObject = renderer.drawImage(imageUrl, 'thumb', color);
 	
 	for (var z = 0; z < data.c; z++) {
 		allPageIds.push(data.title + '-' + ((z<10) ? '0'+z : z));
@@ -134,7 +134,7 @@ function qualityToColor(v, lightness) {
 function Renderer(target) {
 	var me = this;
 	
-	me.drawImage = function (url, className, backgroundColor, title) {
+	me.drawImage = function (url, className, backgroundColor) {
 		var div = $('<div class="'+className+'" style="background-color:'+backgroundColor+';background-image:url(\''+url+'\')" tabindex="0"></div>');
 		target.append(div);
 		return div;

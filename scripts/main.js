@@ -235,10 +235,10 @@ var layouts = {
 				}
 				canvas.append(this.labels);
 			}
-			this.labels.fadeIn(duration);
+			this.labels.delay(duration/2).fadeIn(duration/2);
 		},
 		hide: function (duration) {
-			if (this.labels) this.labels.fadeOut(duration);
+			if (this.labels) this.labels.fadeOut(duration/2);
 		},
 		labelList: [],
 		labels: false,
