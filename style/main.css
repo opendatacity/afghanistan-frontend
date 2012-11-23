@@ -210,10 +210,27 @@ body {
 
 					}
 					
+					#canvas a.event {
+						width: 16px;
+						height: 16px;
+						position: absolute;
+					}
+					
+					#canvas a.event img {
+						width: 16px;
+						height: 16px;
+					}
+					
 					#canvas .popover-title {
-						
 						display: none;
-						
+					}
+					
+					#canvas .articles .popover-title {
+						display: block;
+					}
+					
+					#canvas .articles .tooltip-inner {
+						text-align: left;
 					}
 			
 			#sidebar {

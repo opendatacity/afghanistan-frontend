@@ -1,7 +1,7 @@
 
 var canvas, renderer, documents, documentsIndex, currentDoc, currentLayout;
 var $pages = [];
-var layoutingDuration = 500;
+var layoutingDuration = 700;
 var disqus_shortname, disqus_identifier, disqus_url, disqus_title;
 
 $(function () {
@@ -13,7 +13,11 @@ $(function () {
 	$('#layoutButtons').append($('<button class="btn">Nach Qualität</button>').click(function () {
 		setLayout(layouts.quality, layoutingDuration);
 	}));
-	/*$('#layoutButtons').append($('<button class="btn">Noch mehr Funktionen demnächst!</button>'));*/
+	/*
+	$('#layoutButtons').append($('<button class="btn">Presse</button>').click(function () {
+		setLayout(layouts.media, layoutingDuration);
+	}));
+	*/
 	
 	$('#nav-intro').click(function(){
 		intro_toggle();
@@ -186,6 +190,14 @@ function setLayout(layout, duration) {
 	currentLayout = layout;
 }
 
+function date2string(d) {
+	var days = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Sonnabend'];
+	var months = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+	d = (d-25569)*86400000;
+	d = new Date(d);
+	return d.getDate()+'. '+months[d.getMonth()]+' '+d.getFullYear()+' ('+days[d.getDay()]+')';
+}
+
 var layouts = {
 	quality: {
 		maxY: 0,
@@ -268,7 +280,79 @@ var layouts = {
 			}
 			return f;
 		}
-	}
+	}/*,
+	media: {
+		articles: false,
+		maxY: 0,
+		date2week: function (d) {
+			return Math.floor((41161-d)/7);
+		},
+		show: function (duration) {
+			if (!this.articles) {
+				this.articles = $('<div class="articles" style="display:none"></div>');
+				var projection = this.projection();
+				var rowLength = [];
+				this.maxY = 0;
+				var me = this;
+				for (var i = 0; i < $events.length; i++) {
+					(function () {
+						var event = $events[i];
+						var url = event.q1;
+						if (url == '') url = event.q2;
+						var domain = url.match(/:\/\/(.[^/]+)/);
+						if (domain != null) {
+							domain = domain[1];
+							var imgUrl = $favicons[domain];
+							imgUrl = 'favicon/'+imgUrl+'.png';
+							
+							var p = projection(0, {s:event.s});
+							var xi = (rowLength[p.yi] === undefined) ? 0 : rowLength[p.yi];
+							rowLength[p.yi] = xi+1;
+					
+							var article = $('<a href="javascript:;" class="event" style="top:'+(p.y+7)+'px;left:'+(xi*18+p.x0+130)+'px"><img src="'+imgUrl+'"></a>');
+							
+							article.popover({
+								html:true,
+								title: function () {
+									return event.t
+								},
+								content:function () {
+									return event.d
+								},
+								trigger:'focus',
+								placement:'bottom'
+							});
+							
+							article.tooltip({html:true, placement:'right', title:function () {
+								return '<b>'+event.t+'</b><br>'+date2string(event.s);
+							}});
+							
+							me.articles.append(article);
+							if (me.maxY < p.y) me.maxY = p.y+20;
+						}
+					})()
+				}
+				canvas.append(this.articles);
+			}
+			this.articles.delay(duration/2).fadeIn(duration/2);
+		},
+		hide: function (duration) {
+			if (this.articles) this.articles.fadeOut(duration/2);
+		},
+		projection: function () {
+			var me = this;
+			var width = $('#canvas').innerWidth();
+			var x0 = (width - 578)/2;
+			var f = function (i, data) {
+				var w  = me.date2week(data.s);
+				var x  = (3-(w % 4))*31+x0;
+				var yi = Math.floor(w/4);
+				var y  = yi*40+20;
+				return { x:x, y:y, yi:yi, x0:x0 };
+			}
+			return f;
+		}
+	}*/
 };
 
 function intro_toggle() {
