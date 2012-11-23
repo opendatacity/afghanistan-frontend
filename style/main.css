@@ -247,7 +247,7 @@ body {
 				#sidebar h2 {
 					
 					color: #666;
-					font-size: 22px;
+					font-size: 16px;
 					margin: 20px 0px 5px;
 					padding: 0px;
 					
@@ -306,7 +306,8 @@ body {
 					#sidebar .sidebar-subitem h3 {
 						
 						color: #ccc;
-						font-size: 16px;
+						font-size: 14px;
+						font-weight: normal;
 						line-height: 20px;
 						margin: 0px;
 						padding: 0px;
@@ -378,7 +379,7 @@ body {
 			text-align: center;
 			
 		}
-		
+			
 			#footer #link-impressum+.popover {
 				
 				width: 400px;
