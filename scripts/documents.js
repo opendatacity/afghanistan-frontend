@@ -306,9 +306,13 @@ function hashCheck() {
 			case "faq":
 				$('#faq-container').fadeIn('fast');
 			break;
+			case "mehr-informationen":
+				$('#info-container').fadeIn('fast');
+			break;
 			default:
 				location.hash='!/';
 			break;
+			
 		}
 		
 	}
