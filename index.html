@@ -31,21 +31,23 @@
 		<script src="scripts/search.js" type="text/javascript" charset="utf-8"></script>
 		<script src="scripts/documents.js" type="text/javascript" charset="utf-8"></script>
 		<script src="bootstrap/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-		<!--[if lt IE 7]><meta http-equiv="refresh" content="0;URL='http://wiki.derwesten-recherche.org/'"><![endif]--> 
+		<!--[if lte IE 8]><meta http-equiv="refresh" content="0;URL='http://afghanistan.derwesten-recherche.org/alter_browser.html'"><![endif]--> 
 	</head>
 	<body>
 		<div id="container">
 			<div id="header">
 				<div id="logo"><h1>Die Afghanistan-Papiere</h1></div>
 				<div id="publisher"><p><a href="https://upload.derwesten-recherche.org/upload/"><span>WAZ Mediengruppe</span></a></p></div>
-				<div id="menu">
-					<ul class="nav nav-pills">
-						<li><a id="nav-intro" href="javascript:;">Was soll das?</a></li>
-						<li><a id="nav-wiki" href="http://wiki.derwesten-recherche.org/">Mithelfen/Wiki</a></li>
-						<li><a id="nav-faq" href="#!/faq" onclick="$('#faq-container').fadeIn('fast');">FAQ</a></li>
-						<li><a id="nav-download" href="#!/download" onclick="$('#download-container').fadeIn('fast');">Download</a></li>
-						<li><a id="nav-download" href="#!/mehr-informationen" onclick="$('#info-container').fadeIn('fast');">Mehr Informationen</a></li>
-					</ul>
+				<div id="menuWrapper">
+					<div id="menu">
+						<ul class="nav nav-pills">
+							<li><a id="nav-intro" href="javascript:;">Was soll das?</a></li>
+							<li><a id="nav-wiki" href="http://wiki.derwesten-recherche.org/">Mithelfen/Wiki</a></li>
+							<li><a id="nav-faq" href="#!/faq" onclick="$('#faq-container').fadeIn('fast');">FAQ</a></li>
+							<li><a id="nav-download" href="#!/download" onclick="$('#download-container').fadeIn('fast');">Download</a></li>
+							<li><a id="nav-download" href="#!/mehr-informationen" onclick="$('#info-container').fadeIn('fast');">Mehr Informationen</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 			<div id="intro">
@@ -204,7 +206,7 @@
 						<tr>
 							<th>Name</th>
 							<th>Beschreibung</th>
-							<th>Größe</th>
+							<th style="text-align:center">Größe</th>
 							<th></th>
 							<th></th>
 						</tr>
@@ -213,23 +215,23 @@
 						<tr>
 							<td><strong>Dokumente</strong></td>
 							<td>Alle Dokumente als Grafiken</td>
-							<td>319 MB</td>
-							<td><a href="http://download.derwesten-recherche.org/download/DieAfghanistanPapiere-Dokumente.zip" class="btn btn-small btn-info">Download als Zip-Archiv</a></td>
-							<td><a href="download/DieAfghanistanPapiere-Dokumente.torrent" class="btn btn-small btn-info">Download via BitTorrent</a></td>
+							<td style="text-align:right">319 MB</td>
+							<td style="text-align:center"><a href="http://download.derwesten-recherche.org/download/DieAfghanistanPapiere-Dokumente.zip" class="btn btn-small btn-info">Download als Zip-Archiv</a></td>
+							<td style="text-align:center"><a href="download/DieAfghanistanPapiere-Dokumente.torrent" class="btn btn-small btn-info">Download via BitTorrent</a></td>
 						</tr>
 						<tr>
 							<td><strong>Texte</strong></td>
 							<td>Alle Transkripte als Textdateien</td>
-							<td>2,6 MB</td>
-							<td><a href="http://download.derwesten-recherche.org/download/DieAfghanistanPapiere-Text.zip" class="btn btn-small btn-info">Download als Zip-Archiv</a></td>
-							<td></td>
+							<td style="text-align:right">2,6 MB</td>
+							<td style="text-align:center"><a href="http://download.derwesten-recherche.org/download/DieAfghanistanPapiere-Text.zip" class="btn btn-small btn-info">Download als Zip-Archiv</a></td>
+							<td style="text-align:center"></td>
 						</tr>
 						<tr>
 							<td><strong>Mirror</strong></td>
 							<td>Eine Kopie dieser Webseite (ohne Wiki)</td>
-							<td>723 MB</td>
-							<td><a href="http://download.derwesten-recherche.org/download/DieAfghanistanPapiere-Mirror.zip" class="btn btn-small btn-info">Download als Zip-Archiv</a></td>
-							<td></td>
+							<td style="text-align:right">723 MB</td>
+							<td style="text-align:center"><a href="http://download.derwesten-recherche.org/download/DieAfghanistanPapiere-Mirror.zip" class="btn btn-small btn-info">Download als Zip-Archiv</a></td>
+							<td style="text-align:center"></td>
 						</tr>
 					</tbody>
 				</table>
