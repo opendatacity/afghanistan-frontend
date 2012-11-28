@@ -250,6 +250,7 @@ function LightboxPage(issue, page) {
 		url: 'data/t/'+issue+'-'+page+'.json',
 		method: 'GET',
 		dataType: 'json',
+		cache: false,
 		success: function(data) {
 			$('#lightbox-viewport-trans').html('<p>'+data.content+'</p>');
 			$('#lightbox-viewport-trans').removeClass('loading');
